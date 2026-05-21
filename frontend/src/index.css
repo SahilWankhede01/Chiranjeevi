@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans antialiased selection:bg-ayurveda-green-200 selection:text-ayurveda-green-900 dark:selection:bg-ayurveda-green-800 dark:selection:text-ayurveda-green-100;
+  }
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 dark:bg-zinc-900/80 dark:border-zinc-800/40;
+}
+
+.glass-card {
+  @apply bg-white/65 backdrop-blur-sm border border-white/20 shadow-xl shadow-slate-100/30 dark:bg-zinc-900/65 dark:border-zinc-800/20 dark:shadow-none;
+}
+
+/* Pulse animation for WhatsApp button */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.whatsapp-pulse {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-50 dark:bg-zinc-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full hover:bg-slate-400 dark:bg-zinc-700 dark:hover:bg-zinc-600;
+}
