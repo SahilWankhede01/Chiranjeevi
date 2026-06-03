@@ -8,17 +8,22 @@
   }
   
   body {
-    @apply font-sans antialiased selection:bg-ayurveda-green-200 selection:text-ayurveda-green-900 dark:selection:bg-ayurveda-green-800 dark:selection:text-ayurveda-green-100;
+    @apply font-sans antialiased selection:bg-ayurveda-green-200 selection:text-ayurveda-green-900 dark:selection:bg-ayurveda-green-800 dark:selection:text-ayurveda-green-100 transition-colors duration-500 ease-in-out;
+  }
+  
+  /* Apply smooth transition to all elements that change state on hover or theme toggles */
+  a, button, input, select, textarea, svg, .glass-panel, .glass-card {
+    @apply transition-all duration-300 ease-out;
   }
 }
 
-/* Glassmorphism Classes */
+/* Glassmorphism Classes with softer borders and shadows */
 .glass-panel {
-  @apply bg-white/80 backdrop-blur-md border border-white/20 dark:bg-zinc-900/80 dark:border-zinc-800/40;
+  @apply bg-white/75 backdrop-blur-lg border border-white/30 dark:bg-zinc-950/75 dark:border-zinc-800/40;
 }
 
 .glass-card {
-  @apply bg-white/65 backdrop-blur-sm border border-white/20 shadow-xl shadow-slate-100/30 dark:bg-zinc-900/65 dark:border-zinc-800/20 dark:shadow-none;
+  @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-xl shadow-slate-100/40 dark:bg-zinc-900/60 dark:border-zinc-800/20 dark:shadow-none;
 }
 
 /* Pulse animation for WhatsApp button */

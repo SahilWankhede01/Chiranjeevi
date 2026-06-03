@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Phone, MapPin, Clock, Heart } from 'lucide-react';
+import { Phone, MapPin, Clock } from 'lucide-react';
+import Logo from './Logo';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -12,10 +13,8 @@ const Footer = () => {
           
           {/* Clinic Brand & Philosophy */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-full bg-ayurveda-green-600 flex items-center justify-center text-white">
-                <Heart size={18} className="fill-current" />
-              </div>
+            <div className="flex items-center gap-3 group">
+              <Logo className="w-10 h-10 transition-transform duration-300 group-hover:scale-105" />
               <div>
                 <h3 className="font-extrabold text-lg text-white tracking-wide">{t('clinicName')}</h3>
                 <p className="text-xs text-ayurveda-saffron-400 font-semibold tracking-wider -mt-1 uppercase">{t('clinicSub')}</p>
@@ -72,7 +71,10 @@ const Footer = () => {
 
         {/* Bottom copyright block */}
         <div className="border-t border-slate-800 dark:border-zinc-900 mt-12 pt-8 text-center text-xs text-slate-500 dark:text-zinc-600 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>© {new Date().getFullYear()} {t('clinicName')} {t('clinicSub')}. {t('allRightsReserved')}</p>
+          <div className="text-center sm:text-left">
+            <p>© {new Date().getFullYear()} {t('clinicName')} {t('clinicSub')}. {t('allRightsReserved')}</p>
+            <p className="text-[11px] text-slate-450 dark:text-zinc-500 mt-1">Designed by Sahil Wankhade</p>
+          </div>
           <div className="flex items-center gap-1.5 text-[10px]">
             <span>Developed with</span>
             <div className="w-3.5 h-3.5 text-red-500 fill-current">❤️</div>

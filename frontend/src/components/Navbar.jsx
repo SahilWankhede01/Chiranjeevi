@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon, Globe, Bell, User, LogOut, Heart } from 'lucide-react';
+import { Menu, X, Sun, Moon, Globe, Bell, User, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { useToast } from '../context/ToastContext';
+import Logo from './Logo';
 
 const Navbar = () => {
   const { user, logout, notifications, markNotificationAsRead } = useAuth();
@@ -78,15 +79,13 @@ const Navbar = () => {
         <div className="flex justify-between h-20">
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-ayurveda-green-600 to-ayurveda-saffron-500 flex items-center justify-center text-white shadow-md">
-                <Heart size={20} className="fill-current" />
-              </div>
+            <Link to="/" className="flex items-center gap-3 group">
+              <Logo className="w-11 h-11 transition-transform duration-300 group-hover:scale-105" />
               <div className="flex flex-col">
-                <span className="font-extrabold text-xl tracking-tight text-ayurveda-green-700 dark:text-ayurveda-green-400">
+                <span className="font-serif font-extrabold text-xl tracking-wide text-ayurveda-green-800 dark:text-zinc-50 leading-tight">
                   {t('clinicName')}
                 </span>
-                <span className="text-[10px] font-semibold text-ayurveda-saffron-600 dark:text-ayurveda-saffron-400 uppercase tracking-widest -mt-1">
+                <span className="text-[9px] font-bold text-ayurveda-saffron-600 dark:text-ayurveda-saffron-400 uppercase tracking-[0.18em] mt-0.5">
                   {t('clinicSub')}
                 </span>
               </div>

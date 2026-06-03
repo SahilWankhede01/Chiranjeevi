@@ -13,12 +13,13 @@ import {
   Users, 
   Calendar, 
   Award,
-  BookOpen
+  BookOpen,
+  Sparkles
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { showToast } = useToast();
   
   // FAQs Accordion State
@@ -48,34 +49,6 @@ const Home = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  // Group Diseases for rendering
-  const orthoDiseases = [
-    { key: 'spondylosis', label: t('spondylosis') },
-    { key: 'cordCompression', label: t('cordCompression') },
-    { key: 'tinglingNumbness', label: t('tinglingNumbness') },
-    { key: 'arthritisRheumatism', label: t('arthritisRheumatism') },
-    { key: 'kneeDegeneration', label: t('kneeDegeneration') },
-    { key: 'osteoporosis', label: t('osteoporosis') },
-    { key: 'paralysis', label: t('paralysis') },
-    { key: 'jointSwellingGout', label: t('jointSwellingGout') },
-    { key: 'neckBackPain', label: t('neckBackPain') },
-    { key: 'dizzinessBalance', label: t('dizzinessBalance') },
-    { key: 'stomachDiseases', label: t('stomachDiseases') }
-  ];
-
-  const gastroDiseases = [
-    { key: 'postOpComplications', label: t('postOpComplications') },
-    { key: 'sciatica', label: t('sciatica') },
-    { key: 'frozenShoulder', label: t('frozenShoulder') },
-    { key: 'waistToLegsNervePain', label: t('waistToLegsNervePain') },
-    { key: 'neckToLegsNervePain', label: t('neckToLegsNervePain') },
-    { key: 'handLegTingling', label: t('handLegTingling') },
-    { key: 'appetiteIndigestion', label: t('appetiteIndigestion') },
-    { key: 'acidity', label: t('acidity') },
-    { key: 'chestBurning', label: t('chestBurning') },
-    { key: 'constipationBowel', label: t('constipationBowel') },
-    { key: 'pilesFistula', label: t('pilesFistula') }
-  ];
 
   const faqs = [
     { q: t('faqQ1'), a: t('faqA1') },
@@ -87,22 +60,113 @@ const Home = () => {
     <div className="flex flex-col min-h-screen">
       
       {/* 1. HERO SECTION */}
-      <section id="hero" className="relative bg-gradient-to-b from-emerald-50/50 via-white to-white dark:from-zinc-900/20 dark:via-zinc-950 dark:to-zinc-950 pt-10 pb-20 md:py-32 overflow-hidden transition-all duration-300">
+      <section id="hero" className="relative bg-[#faf7e6] dark:bg-zinc-950 pt-16 pb-24 md:py-32 overflow-hidden transition-all duration-300">
+        
+        {/* Localized Floating Leaf Animations (Ayurveda theme) */}
+        <style>{`
+          @keyframes leaf-float-up {
+            0% {
+              transform: translateY(105vh) rotate(0deg);
+              opacity: 0;
+            }
+            10% {
+              opacity: 0.15;
+            }
+            90% {
+              opacity: 0.15;
+            }
+            100% {
+              transform: translateY(-10vh) rotate(360deg);
+              opacity: 0;
+            }
+          }
+          @keyframes leaf-sway {
+            0%, 100% {
+              transform: translateX(0);
+            }
+            50% {
+              transform: translateX(35px);
+            }
+          }
+          .floating-leaf {
+            position: absolute;
+            bottom: -50px;
+            color: #15803d; /* Forest Green */
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            animation: leaf-float-up linear infinite;
+          }
+          .floating-leaf svg {
+            animation: leaf-sway ease-in-out infinite;
+          }
+          .dark .floating-leaf {
+            color: #34d399; /* Emerald 400 */
+          }
+        `}</style>
+
+        {/* Floating Leaves Background Layer */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          {/* Leaf 1 */}
+          <div className="floating-leaf" style={{ left: '6%', width: '26px', height: '26px', animationDuration: '18s', animationDelay: '0s' }}>
+            <svg viewBox="0 0 30 30" className="w-full h-full fill-current" style={{ animationDuration: '4s' }} xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3 C13 3, 8 7, 8 13 C8 18, 11 21, 15 25 C19 21, 22 18, 22 13 C22 7, 17 3, 15 3 Z M15 3 L15 25" stroke="currentColor" strokeWidth="0.8" />
+            </svg>
+          </div>
+          {/* Leaf 2 */}
+          <div className="floating-leaf" style={{ left: '20%', width: '34px', height: '34px', animationDuration: '24s', animationDelay: '3s' }}>
+            <svg viewBox="0 0 30 30" className="w-full h-full fill-current" style={{ animationDuration: '5.5s' }} xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3 C13 3, 8 7, 8 13 C8 18, 11 21, 15 25 C19 21, 22 18, 22 13 C22 7, 17 3, 15 3 Z M15 3 L15 25" stroke="currentColor" strokeWidth="0.8" />
+            </svg>
+          </div>
+          {/* Leaf 3 */}
+          <div className="floating-leaf" style={{ left: '35%', width: '22px', height: '22px', animationDuration: '15s', animationDelay: '6s' }}>
+            <svg viewBox="0 0 30 30" className="w-full h-full fill-current" style={{ animationDuration: '3.5s' }} xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3 C13 3, 8 7, 8 13 C8 18, 11 21, 15 25 C19 21, 22 18, 22 13 C22 7, 17 3, 15 3 Z M15 3 L15 25" stroke="currentColor" strokeWidth="0.8" />
+            </svg>
+          </div>
+          {/* Leaf 4 */}
+          <div className="floating-leaf" style={{ left: '50%', width: '30px', height: '30px', animationDuration: '20s', animationDelay: '1.5s' }}>
+            <svg viewBox="0 0 30 30" className="w-full h-full fill-current" style={{ animationDuration: '4.8s' }} xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3 C13 3, 8 7, 8 13 C8 18, 11 21, 15 25 C19 21, 22 18, 22 13 C22 7, 17 3, 15 3 Z M15 3 L15 25" stroke="currentColor" strokeWidth="0.8" />
+            </svg>
+          </div>
+          {/* Leaf 5 */}
+          <div className="floating-leaf" style={{ left: '68%', width: '24px', height: '24px', animationDuration: '17s', animationDelay: '9s' }}>
+            <svg viewBox="0 0 30 30" className="w-full h-full fill-current" style={{ animationDuration: '4.2s' }} xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3 C13 3, 8 7, 8 13 C8 18, 11 21, 15 25 C19 21, 22 18, 22 13 C22 7, 17 3, 15 3 Z M15 3 L15 25" stroke="currentColor" strokeWidth="0.8" />
+            </svg>
+          </div>
+          {/* Leaf 6 */}
+          <div className="floating-leaf" style={{ left: '82%', width: '32px', height: '32px', animationDuration: '22s', animationDelay: '4.5s' }}>
+            <svg viewBox="0 0 30 30" className="w-full h-full fill-current" style={{ animationDuration: '5s' }} xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 3 C13 3, 8 7, 8 13 C8 18, 11 21, 15 25 C19 21, 22 18, 22 13 C22 7, 17 3, 15 3 Z M15 3 L15 25" stroke="currentColor" strokeWidth="0.8" />
+            </svg>
+          </div>
+        </div>
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
             {/* Hero Left Content */}
             <div className="flex flex-col gap-6 text-left max-w-xl animate-slide-up">
-              <div className="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-ayurveda-green-50 dark:bg-emerald-950/30 border border-ayurveda-green-100 dark:border-emerald-900/30 text-xs font-bold text-ayurveda-green-700 dark:text-ayurveda-green-400 uppercase tracking-wider self-start">
-                <Activity size={14} />
-                {t('heroTag')}
+              <div className="inline-flex items-center gap-1.5 py-1 text-xs font-bold text-ayurveda-green-700 dark:text-ayurveda-green-400 uppercase tracking-widest self-start">
+                <span>🍃</span>
+                <span>{language === 'en' ? 'AYURVEDIC WELLNESS' : t('heroTag')}</span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-800 dark:text-zinc-50 leading-tight">
-                {t('heroTitle')}
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-serif text-slate-800 dark:text-zinc-50 leading-[1.15] tracking-tight">
+                {language === 'en' ? (
+                  <>
+                    Heal naturally,<br />
+                    <span className="italic font-serif text-ayurveda-green-700 dark:text-ayurveda-green-400">live in balance.</span>
+                  </>
+                ) : (
+                  t('heroTitle')
+                )}
               </h1>
               
-              <p className="text-base sm:text-lg text-slate-500 dark:text-zinc-400 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-650 dark:text-zinc-400 leading-relaxed">
                 {t('heroDesc')}
               </p>
               
@@ -110,30 +174,31 @@ const Home = () => {
               <div className="flex flex-wrap items-center gap-4 mt-2">
                 <Link
                   to="/patient-dashboard"
-                  className="bg-ayurveda-green-600 hover:bg-ayurveda-green-700 text-white font-bold text-sm px-7 py-3.5 rounded-full shadow-lg shadow-emerald-700/20 hover:shadow-xl transition-all duration-200 uppercase tracking-wider"
+                  className="bg-[#1c452d] hover:bg-[#132f1f] text-white font-bold text-sm px-8 py-3.5 rounded-full shadow-lg shadow-emerald-900/10 hover:shadow-xl transition-all duration-200 inline-flex items-center gap-2"
                 >
-                  {t('heroCTA1')}
+                  <span>{t('heroCTA1')}</span>
+                  <span className="text-lg">→</span>
                 </Link>
                 <a
                   href="#treatments"
-                  className="bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800/80 text-slate-800 dark:text-zinc-100 border border-slate-200 dark:border-zinc-800 font-bold text-sm px-7 py-3.5 rounded-full shadow-sm transition-all duration-200 uppercase tracking-wider"
+                  className="bg-transparent hover:bg-black/5 text-[#1c452d] dark:text-[#faf7e6] border border-[#1c452d] dark:border-[#faf7e6]/50 font-bold text-sm px-8 py-3.5 rounded-full transition-all duration-200"
                 >
                   {t('heroCTA2')}
                 </a>
               </div>
 
               {/* Badges/Trust Metrics */}
-              <div className="grid grid-cols-3 gap-4 border-t border-slate-100 dark:border-zinc-800 mt-6 pt-6">
+              <div className="grid grid-cols-3 gap-4 border-t border-slate-200/50 dark:border-zinc-800 mt-6 pt-6">
                 <div>
-                  <span className="block text-2xl font-extrabold text-ayurveda-green-600 dark:text-ayurveda-green-400">12+</span>
+                  <span className="block text-2xl font-extrabold text-[#1c452d] dark:text-ayurveda-green-450">5+</span>
                   <span className="text-xs text-slate-400 dark:text-zinc-500">{t('yearsExp')}</span>
                 </div>
                 <div>
-                  <span className="block text-2xl font-extrabold text-ayurveda-green-600 dark:text-ayurveda-green-400">10k+</span>
+                  <span className="block text-2xl font-extrabold text-[#1c452d] dark:text-ayurveda-green-450">5k+</span>
                   <span className="text-xs text-slate-400 dark:text-zinc-500">{t('satisfiedPatients')}</span>
                 </div>
                 <div>
-                  <span className="block text-2xl font-extrabold text-ayurveda-green-600 dark:text-ayurveda-green-400">98%</span>
+                  <span className="block text-2xl font-extrabold text-[#1c452d] dark:text-ayurveda-green-450">98%</span>
                   <span className="text-xs text-slate-400 dark:text-zinc-500">{t('successRate')}</span>
                 </div>
               </div>
@@ -141,25 +206,29 @@ const Home = () => {
             </div>
 
             {/* Hero Right Avatar (Generated Image) */}
-            <div className="relative flex justify-center lg:justify-end animate-fade-in">
+            <div className="relative flex justify-center lg:justify-end animate-fade-in px-4 sm:px-0">
               <div className="absolute inset-0 bg-gradient-to-tr from-ayurveda-green-200 to-ayurveda-saffron-100 dark:from-emerald-950/20 dark:to-orange-950/20 rounded-full blur-3xl opacity-70 -z-10 transform scale-95"></div>
-              <div className="relative border-4 border-white dark:border-zinc-900 rounded-[2.5rem] shadow-2xl overflow-hidden max-w-sm w-full aspect-square">
-                <img
-                  src="/doctor_avatar.png"
-                  alt={t('doctorName')}
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* floating clinician card */}
-                <div className="absolute bottom-6 left-6 right-6 glass-panel p-4 rounded-2xl shadow-xl flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-ayurveda-green-600 flex items-center justify-center text-white shrink-0">
-                    <Award size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-extrabold text-xs text-slate-800 dark:text-zinc-100">{t('doctorName')}</h4>
-                    <p className="text-[10px] text-ayurveda-green-600 dark:text-ayurveda-green-400 font-semibold">{t('doctorDegrees')}</p>
-                  </div>
+              
+              <div className="relative max-w-sm w-full aspect-[2/3] sm:aspect-[3/4]">
+                {/* Inner image container */}
+                <div className="relative w-full h-full border-4 border-white dark:border-zinc-900 rounded-[2.5rem] shadow-2xl overflow-hidden">
+                  <img
+                    src="/doctor_avatar.jpg"
+                    alt={t('doctorName')}
+                    className="w-full h-full object-cover object-center"
+                  />
                 </div>
+                
+                {/* Floating stats bubble */}
+                <div className="absolute -bottom-6 -left-6 bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-850 p-4.5 px-6.5 rounded-3xl shadow-2xl z-20">
+                  <span className="block text-xl font-extrabold text-[#1c452d] dark:text-[#46ca96] leading-none">5,000+</span>
+                  <span className="text-[9px] text-slate-400 dark:text-zinc-500 font-extrabold tracking-widest uppercase mt-1 block">
+                    {language === 'mr' ? 'रुग्ण बरे झाले' : language === 'hi' ? 'मरीज ठीक हुए' : 'Patients Healed'}
+                  </span>
+                </div>
+
+
+
               </div>
             </div>
 
@@ -244,12 +313,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 3. TREATMENTS SECTION (Diseases Grid) */}
-      <section id="treatments" className="py-20 bg-white dark:bg-zinc-950 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* 3. TREATMENTS SECTION (Services Grid) */}
+      <section id="treatments" className="py-20 bg-[#faf7e6] dark:bg-zinc-950 border-t border-slate-200/30 dark:border-zinc-900 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-800 dark:text-zinc-50">
+          <div className="max-w-3xl mx-auto mb-16 text-center">
+            <h2 className="text-4xl font-serif text-slate-800 dark:text-zinc-50 leading-tight">
               {t('treatmentTitle')}
             </h2>
             <p className="text-slate-500 dark:text-zinc-400 mt-3 leading-relaxed">
@@ -257,59 +326,64 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-            
-            {/* Category 1: Orthopedic & Nerve */}
-            <div className="flex flex-col gap-6 bg-slate-50/50 dark:bg-zinc-900/20 border border-slate-100 dark:border-zinc-800/40 p-8 rounded-3xl text-left">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-ayurveda-green-100 dark:bg-emerald-950/40 text-ayurveda-green-600 dark:text-ayurveda-green-400 rounded-xl flex items-center justify-center">
-                  <Bone size={22} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {(Array.isArray(t('servicesData')) ? t('servicesData') : []).map((s) => (
+              <div 
+                key={s.id} 
+                className="bg-[#fbfbf6] dark:bg-zinc-900 border border-slate-200/60 dark:border-zinc-800 rounded-[2.2rem] overflow-hidden flex flex-col p-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Card Top Inset Image */}
+                <div className="rounded-2xl overflow-hidden aspect-[4/3] w-full mb-5 relative bg-slate-100 dark:bg-zinc-800">
+                  <img 
+                    src={s.image} 
+                    alt={s.title} 
+                    className="w-full h-full object-cover" 
+                    onError={(e) => {
+                      // Fallback in case of image loading failure
+                      e.target.style.display = 'none';
+                    }}
+                  />
                 </div>
-                <div>
-                  <h3 className="font-extrabold text-lg text-slate-800 dark:text-zinc-100">{t('orthoCategory')}</h3>
-                  <p className="text-xs text-slate-400 dark:text-zinc-500 mt-0.5">{t('orthoDesc')}</p>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-4">
-                {orthoDiseases.map((d) => (
-                  <div key={d.key} className="flex items-start gap-2.5 bg-white dark:bg-zinc-900 p-3.5 rounded-2xl shadow-sm border border-slate-100/50 dark:border-zinc-850 transition-all hover:-translate-y-0.5 duration-200">
-                    <Check size={14} className="text-ayurveda-green-500 mt-1 shrink-0 stroke-[3]" />
-                    <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 leading-tight">{d.label}</span>
+                
+                {/* Card Body */}
+                <div className="px-2 flex-grow flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-serif text-2xl font-medium text-slate-800 dark:text-zinc-100 mb-2.5">
+                      {s.title}
+                    </h3>
+                    <p className="text-slate-500 dark:text-zinc-400 text-xs leading-relaxed mb-4">
+                      {s.desc}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Category 2: Digestive & Other */}
-            <div className="flex flex-col gap-6 bg-slate-50/50 dark:bg-zinc-900/20 border border-slate-100 dark:border-zinc-800/40 p-8 rounded-3xl text-left">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-ayurveda-saffron-100 dark:bg-orange-950/30 text-ayurveda-saffron-500 dark:text-ayurveda-saffron-400 rounded-xl flex items-center justify-center">
-                  <Activity size={22} />
-                </div>
-                <div>
-                  <h3 className="font-extrabold text-lg text-slate-800 dark:text-zinc-100">{t('otherCategory')}</h3>
-                  <p className="text-xs text-slate-400 dark:text-zinc-500 mt-0.5">{t('otherDesc')}</p>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-4">
-                {gastroDiseases.map((d) => (
-                  <div key={d.key} className="flex items-start gap-2.5 bg-white dark:bg-zinc-900 p-3.5 rounded-2xl shadow-sm border border-slate-100/50 dark:border-zinc-850 transition-all hover:-translate-y-0.5 duration-200">
-                    <Check size={14} className="text-ayurveda-saffron-500 mt-1 shrink-0 stroke-[3]" />
-                    <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 leading-tight">{d.label}</span>
+                  
+                  <div>
+                    <hr className="border-slate-200/50 dark:border-zinc-800/80 my-4" />
+                    
+                    <div className="mb-2">
+                      <span className="text-[10px] font-extrabold tracking-wider text-[#b45309] dark:text-amber-500 uppercase block mb-3">
+                        {t('keyBenefits')}
+                      </span>
+                      <ul className="space-y-2">
+                        {s.benefits && s.benefits.map((b, idx) => (
+                          <li key={idx} className="flex items-start gap-2.5 text-slate-650 dark:text-zinc-350 text-xs font-semibold">
+                            <span className="text-[#1c452d] dark:text-emerald-450 shrink-0">✓</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
 
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Quick link below grid */}
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <Link
               to="/patient-dashboard"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-bold text-xs uppercase tracking-wider px-6.5 py-3 rounded-full hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 bg-[#1c452d] hover:bg-[#132f1f] text-white font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-full shadow-lg shadow-emerald-900/10 hover:shadow-xl transition-all duration-200"
             >
               <Calendar size={14} />
               {t('bookNow')}
@@ -477,12 +551,13 @@ const Home = () => {
             <div className="rounded-3xl overflow-hidden shadow-sm border border-slate-100 dark:border-zinc-800/80 min-h-[350px] relative">
               <iframe
                 title={t('mapEmbedTitle')}
-                src="https://maps.google.com/maps?q=Pandurna%20Chowk,%20Karanja%20Maharashtra&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m2!2m1!1sF7G9%2BJPF%2C+Warud%2C+Maharashtra+444906"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: '350px' }}
                 allowFullScreen=""
                 loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
 

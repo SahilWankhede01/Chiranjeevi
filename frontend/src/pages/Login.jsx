@@ -51,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-slate-50 dark:from-zinc-950 dark:to-zinc-900 transition-colors duration-300">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-b from-[#faf7e6] to-[#faf7e6]/95 dark:from-zinc-950 dark:to-zinc-900 transition-colors duration-300">
       <div className="max-w-md w-full space-y-8 glass-card p-8 rounded-3xl shadow-2xl border border-slate-100 dark:border-zinc-800/80">
         
         {/* Title */}

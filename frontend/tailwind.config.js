@@ -10,28 +10,30 @@ export default {
       colors: {
         ayurveda: {
           green: {
-            50: '#f1f8f5',
-            100: '#dcefe5',
-            200: '#bce0cd',
-            300: '#8ec9ab',
-            400: '#5da983',
-            500: '#3c8c65', // Main Ayurvedic green
-            600: '#2e704f',
-            700: '#255a40',
-            800: '#1f4834',
-            900: '#1a3c2c',
+            50: '#f0fbf7',
+            105: '#dcfef1',
+            100: '#d9f5ea',
+            200: '#b5ecd7',
+            300: '#81deb9',
+            400: '#46ca96',
+            500: '#1b9d67', // A much smoother, richer Ayurvedic green
+            605: '#169d67',
+            600: '#128657',
+            700: '#0c6d46',
+            800: '#0a593a',
+            900: '#084830',
           },
           saffron: {
-            50: '#fffbf0',
-            100: '#feeed1',
-            200: '#fcdba0',
-            300: '#fac265',
-            400: '#f7a233',
-            500: '#f2851c', // Main Saffron Orange
-            600: '#d96c14',
-            700: '#b45212',
-            800: '#8f4014',
-            900: '#753513',
+            50: '#fdf8eb',
+            100: '#faebd0',
+            200: '#f5d59e',
+            300: '#efba63',
+            400: '#e89932',
+            500: '#d97706', // Beautiful, rich saffron amber (less harsh than pure orange)
+            600: '#b45309',
+            700: '#923e12',
+            800: '#78300f',
+            900: '#63250f',
           },
           clay: {
             50: '#faf8f6',
@@ -40,11 +42,13 @@ export default {
             300: '#ccb4a3',
             400: '#b08f77',
             500: '#9b765d',
+            605: '#169d67',
             600: '#8d654d',
             700: '#75513d',
             800: '#604334',
             900: '#50392d',
-          }
+          },
+          cream: '#faf7e6',
         }
       },
       fontFamily: {

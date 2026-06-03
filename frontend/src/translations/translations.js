@@ -23,8 +23,8 @@ export const translations = {
     heroTag: "Authentic Ayurvedic Healing",
     heroTitle: "Restore Your Natural Balance and Inner Health",
     heroDesc: "Experience premium, personalized Panchakarma and Ayurvedic therapies under the expert care of Dr. Yatesh Gahukar. Specializing in Orthopedic, Nerve Disorders, Joint Degeneration, and Digestive Problems.",
-    heroCTA1: "Schedule Consultation",
-    heroCTA2: "Explore Treatments",
+    heroCTA1: "Book Appointment",
+    heroCTA2: "Explore Services",
     yearsExp: "Years of Experience",
     satisfiedPatients: "Happy Patients",
     successRate: "Recovery Rate",
@@ -39,38 +39,96 @@ export const translations = {
     specialty3: "Chronic Digestive & Metabolic Disorders",
     specialty4: "Nerve Pain & Neurological Rehabilitation",
 
-    // Diseases & Treatments
-    treatmentTitle: "Treatments & Specialities",
-    treatmentSubtitle: "Specialized Ayurvedic care for chronic diseases and lifestyle disorders.",
-    orthoCategory: "Orthopedic & Nerve Disorders",
-    orthoDesc: "Natural pain relief, rejuvenation, and nerve rehabilitation without surgical interventions.",
-    otherCategory: "Digestive & Other Health Disorders",
-    otherDesc: "Holistic treatments to restore metabolic fire (Agni), remove toxins, and rejuvenate organs.",
+    // Diseases & Treatments / Services
+    treatmentTitle: "Our Specialized Services",
+    treatmentSubtitle: "Explore our authentic Ayurvedic clinical departments and holistic wellness therapies.",
+    clinicalSpecialtiesCategory: "Specialized Clinical Departments",
+    clinicalSpecialtiesDesc: "Authentic Ayurvedic specialized diagnostic and clinical care departments.",
+    wellnessTherapiesCategory: "Wellness, Prevention & Allied Therapies",
+    wellnessTherapiesDesc: "Holistic treatment approaches to restore health, build immunity, and maintain vitality.",
     readMore: "Learn More",
 
-    // Diseases translation mapping
-    spondylosis: "Spondylosis",
-    cordCompression: "Cord Compression",
-    tinglingNumbness: "Tingling / Numbness",
-    arthritisRheumatism: "Arthritis / Rheumatism",
-    kneeDegeneration: "Knee Degeneration / Knee Pain",
-    osteoporosis: "Osteoporosis",
-    paralysis: "Paralysis",
-    jointSwellingGout: "Joint Swelling / Gout",
-    neckBackPain: "Neck / Back Pain / Slip Disc",
-    dizzinessBalance: "Dizziness / Loss of Balance",
-    stomachDiseases: "Stomach Diseases",
-    postOpComplications: "Post-Operation Complications",
-    sciatica: "Sciatica",
-    frozenShoulder: "Frozen Shoulder",
-    waistToLegsNervePain: "Waist-to-Legs Nerve Pain",
-    neckToLegsNervePain: "Neck-to-Legs Nerve Pain",
-    handLegTingling: "Hand & Leg Numbness",
-    appetiteIndigestion: "Loss of Appetite / Indigestion",
-    acidity: "Acidity",
-    chestBurning: "Burning Sensation in Chest",
-    constipationBowel: "Constipation / Improper Bowel Movement",
-    pilesFistula: "Piles & Fistula",
+    // Services translation mapping
+    panchakarma: "Panchakarma (Detoxification)",
+    kayachikitsa: "Kayachikitsa (General Medicine)",
+    shalyaTantra: "Shalya Tantra (Ayurvedic Surgery & Parasurgery)",
+    shalakyaTantra: "Shalakya Tantra (ENT & Ophthalmology)",
+    dravyaguna: "Dravyaguna (Pharmacology & Herbal Medicine)",
+    rasashastra: "Rasashastra (Alchemy & Herbo-mineral Formulations)",
+    bhaishajyaKalpana: "Bhaishajya Kalpana (Pharmaceutics)",
+    agadaTantra: "Agada Tantra (Toxicology)",
+    swasthavritta: "Swasthavritta (Preventive Medicine & Yoga)",
+    marmaTherapy: "Marma Therapy (Vital Points Healing)",
+    yogaTherapy: "Yoga Therapy (Therapeutic Yoga)",
+    naturopathy: "Naturopathy (Drugless Natural Healing)",
+    rasayanaTherapy: "Rasayana Therapy (Rejuvenation & Geriatrics)",
+    vajikaranaTherapy: "Vajikarana Therapy (Reproductive Health & Aphrodisiacs)",
+    keyBenefits: "Key Benefits",
+    servicesData: [
+      {
+        id: "consultation",
+        title: "Ayurvedic Consultation",
+        desc: "Detailed prakriti & vikriti analysis with a personalised treatment plan.",
+        image: "/ayurvedic_consultation.png",
+        benefits: ["Identifies root cause of imbalance", "Custom diet & lifestyle plan", "Safe, drug-free guidance"]
+      },
+      {
+        id: "panchakarma",
+        title: "Panchakarma Therapy",
+        desc: "Classical five-fold detoxification — Vamana, Virechana, Basti, Nasya, Raktamokshana.",
+        image: "/panchakarma_therapy.png",
+        benefits: ["Deep cellular detox", "Boosts immunity & vitality", "Balances all three doshas", "Relieves chronic disease"]
+      },
+      {
+        id: "agnikarma",
+        title: "Agnikarma & Kshara Sutra",
+        desc: "Traditional para-surgical procedures for piles, fistula and chronic joint pain.",
+        image: "/agnikarma_kshara_sutra.png",
+        benefits: ["Minimally invasive", "No hospital stay", "Permanent relief in piles & fistula"]
+      },
+      {
+        id: "joint_spine",
+        title: "Joint & Spine Care",
+        desc: "Kati Basti, Janu Basti, Pizhichil and Abhyanga for arthritis, sciatica and back pain.",
+        image: "/joint_spine_care.png",
+        benefits: ["Reduces pain & stiffness", "Improves mobility", "Strengthens muscles & nerves"]
+      },
+      {
+        id: "shirodhara",
+        title: "Shirodhara & Stress Relief",
+        desc: "Warm medicated oil poured on the forehead to calm the nervous system.",
+        image: "/shirodhara_stress_relief.png",
+        benefits: ["Relieves anxiety & insomnia", "Eases migraines", "Improves focus & sleep quality"]
+      },
+      {
+        id: "lifestyle",
+        title: "Lifestyle Disorders",
+        desc: "Diabetes, hypertension, thyroid, PCOS — managed holistically with herbs & routine.",
+        image: "/lifestyle_disorders.png",
+        benefits: ["Lower blood sugar & BP naturally", "Hormonal balance", "Sustainable weight management"]
+      },
+      {
+        id: "respiratory",
+        title: "Respiratory Care",
+        desc: "Asthma, sinusitis and chronic cough through Nasya, steam and herbal protocols.",
+        image: "/respiratory_care.png",
+        benefits: ["Clears airways & sinuses", "Reduces allergy episodes", "Strengthens lung capacity"]
+      },
+      {
+        id: "skin_hair",
+        title: "Skin & Hair Care",
+        desc: "Psoriasis, eczema, acne and hair-fall managed through blood purification (Raktashodhana).",
+        image: "/skin_hair_care.png",
+        benefits: ["Clearer, healthier skin", "Reduces hair fall & dandruff", "Long-term remission of chronic conditions"]
+      },
+      {
+        id: "garbhasanskar",
+        title: "Garbhasanskar",
+        desc: "Pre-conception, pregnancy and post-natal care for mother and child.",
+        image: "/garbhasanskar.png",
+        benefits: ["Healthy pregnancy", "Stronger immunity for baby", "Faster post-natal recovery"]
+      }
+    ],
 
     // Appointment Booking Page
     bookTitle: "Book Consultation",
@@ -119,7 +177,7 @@ export const translations = {
     contactTitle: "Get in Touch",
     contactSubtitle: "Visit our clinic or contact us via phone or WhatsApp.",
     addressLabel: "Address",
-    addressVal: "Near Dr. Pravin Chaudhary Hospital, Beside Rajan Medical, Pandurna Chowk, Karanja.",
+    addressVal: "F7G9+JPF, Warud, Maharashtra 444906",
     phoneLabel: "Phone",
     phoneVal: "+91 9145331731",
     hoursLabel: "Clinic Hours",
@@ -215,38 +273,96 @@ export const translations = {
     specialty3: "जुनाट पोटाचे आणि पचन आजार",
     specialty4: "नसांचे आजार आणि पुनर्वसन",
 
-    // Diseases & Treatments
-    treatmentTitle: "उपचार आणि आजार",
-    treatmentSubtitle: "जुनाट आजार आणि जीवनशैली विकारांसाठी विशेष आयुर्वेदिक काळजी.",
-    orthoCategory: "अस्थिरोग आणि नसांचे आजार",
-    orthoDesc: "विना शस्त्रक्रिया नैसर्गिक वेदनामुक्ती, पुनरुज्जीवन आणि नसांचे आजार बरे करणे.",
-    otherCategory: "पचन आणि इतर आरोग्य विकार",
-    otherDesc: "जठराग्नी सुदृढ करणे, शरीरातील विषारी घटक बाहेर काढणे आणि अवयवांना टवटवीत करणे.",
+    // Diseases & Treatments / Services
+    treatmentTitle: "आमच्या विशेष सेवा",
+    treatmentSubtitle: "आमचे अस्सल आयुर्वेदिक क्लिनिकल विभाग आणि समग्र वेलनेस थेरपी पहा.",
+    clinicalSpecialtiesCategory: "विशेष नैदानिक विभाग (क्लिनिकल विभाग)",
+    clinicalSpecialtiesDesc: "अस्सल आयुर्वेदिक विशेष निदान आणि नैदानिक उपचार विभाग.",
+    wellnessTherapiesCategory: "आरोग्य, प्रतिबंध आणि सहाय्यक उपचार",
+    wellnessTherapiesDesc: "आरोग्य पुनर्संचयित करण्यासाठी, प्रतिकारशक्ती वाढवण्यासाठी आणि चैतन्य टिकवून ठेवण्यासाठी समग्र उपचार पद्धती.",
     readMore: "अधिक माहिती मिळवा",
 
-    // Diseases translation mapping
-    spondylosis: "स्पॉन्डिलायसिस (मणक्याची झीज)",
-    cordCompression: "मज्जारज्जू दाबला जाणे",
-    tinglingNumbness: "हात-पायांना मुंग्या येणे / बधिरता",
-    arthritisRheumatism: "आमवात / संधिवात",
-    kneeDegeneration: "गुडघ्याची झीज / गुडघेदुखी",
-    osteoporosis: "ऑस्टियोपोरोसिस (हाडे ठिसूळ होणे)",
-    paralysis: "पक्षाघात (पॅरालिसिस)",
-    jointSwellingGout: "सांधे सुजणे / गाऊट",
-    neckBackPain: "मान पाठ दुखी / स्लिप डिस्क",
-    dizzinessBalance: "चक्कर येणे / शरीराचा समतोल जाणे",
-    stomachDiseases: "पोटाचे विविध आजार",
-    postOpComplications: "शस्त्रक्रियेनंतरचे दुष्परिणाम",
-    sciatica: "सायटिका (कंबर व पाय दुखी)",
-    frozenShoulder: "खांदा जखडणे (फ्रोजन शोल्डर)",
-    waistToLegsNervePain: "कमरेपासून पायापर्यंत जाणारी वेदना",
-    neckToLegsNervePain: "मानेपासून हातापर्यंत जाणारी वेदना",
-    handLegTingling: "हात आणि पायात जडपणा येणे",
-    appetiteIndigestion: "भूक न लागणे / अपचन",
-    acidity: "अम्लपित्त (अॅसिडिटी)",
-    chestBurning: "छातीत जळजळ होणे",
-    constipationBowel: "बद्धकोष्ठता / साफ न होणे",
-    pilesFistula: "मूळव्याध आणि भगंदर",
+    // Services translation mapping
+    panchakarma: "पंचकर्म (शरीर शुद्धी व डिटॉक्स)",
+    kayachikitsa: "कायचिकित्सा (सामान्य औषधोपचार)",
+    shalyaTantra: "शल्य तंत्र (आयुर्वेदिक शस्त्रक्रिया व क्षारसूत्र)",
+    shalakyaTantra: "शालाक्य तंत्र (कान, नाक, घसा आणि नेत्र रोग)",
+    dravyaguna: "द्रव्यगुण शास्त्र (औषधी वनस्पती औषधशास्त्र)",
+    rasashastra: "रसशास्त्र (धातू व खनिज औषध निर्मिती)",
+    bhaishajyaKalpana: "भैषज्य कल्पना (औषध निर्मिती शास्त्र)",
+    agadaTantra: "अगद तंत्र (विषविज्ञान व उपचार)",
+    swasthavritta: "स्वस्थवृत्त (योग, आहार व निरोगी जीवनशैली)",
+    marmaTherapy: "मर्म चिकित्सा (ऊर्जा केंद्र उपचार)",
+    yogaTherapy: "योग थेरपी (योगोपचार)",
+    naturopathy: "निसर्गोपचार (नॅचरोपॅथी)",
+    rasayanaTherapy: "रसायन चिकित्सा (पुनरुज्जीवन व वृद्धत्व प्रतिबंध)",
+    vajikaranaTherapy: "वाजीकरण चिकित्सा (प्रजनन आणि लैंगिक आरोग्य)",
+    keyBenefits: "मुख्य फायदे",
+    servicesData: [
+      {
+        id: "consultation",
+        title: "आयुर्वेदिक सल्लामसलत",
+        desc: "वैयक्तिक उपचार योजनेसह तपशीलवार प्रकृती आणि विकृती विश्लेषण.",
+        image: "/ayurvedic_consultation.png",
+        benefits: ["असंतुलनाचे मूळ कारण शोधणे", "वैयक्तिकृत आहार आणि जीवनशैली योजना", "सुरक्षित आणि दुष्परिणाममुक्त मार्गदर्शन"]
+      },
+      {
+        id: "panchakarma",
+        title: "पंचकर्म चिकित्सा",
+        desc: "शास्त्रीय पंचविध शरीर शुद्धी आणि डिटॉक्स — वमन, विरेचन, बस्ती, नस्य, रक्तमोक्षण.",
+        image: "/panchakarma_therapy.png",
+        benefits: ["खोल पेशी डिटॉक्स", "प्रतिकारशक्ती आणि चैतन्य वाढवणे", "तीन्ही दोषांचे (वात-पित्त-कफ) संतुलन", "जुनाट आजारांपासून मुक्ती"]
+      },
+      {
+        id: "agnikarma",
+        title: "अग्निकर्म आणि क्षारसूत्र",
+        desc: "मूळव्याध, भगंदर आणि जुनाट सांधेदुखीसाठी पारंपारिक आयुर्वेदिक शस्त्रक्रिया आणि क्षारसूत्र उपचार.",
+        image: "/agnikarma_kshara_sutra.png",
+        benefits: ["किमान आक्रमक (अल्प शस्त्रक्रिया)", "रुग्णालयात दाखल राहण्याची गरज नाही", "मूळव्याध आणि भगंदर आजारात कायमचा आराम"]
+      },
+      {
+        id: "joint_spine",
+        title: "सांधे आणि मणक्याची काळजी",
+        desc: "संधिवात, सायटिका आणि पाठदुखीसाठी कटिबस्ती, जानुबस्ती, पिळिच्चिल आणि अभ्यंग उपचार.",
+        image: "/joint_spine_care.png",
+        benefits: ["वेदना आणि ताठरपणा कमी करणे", "सांध्यांची हालचाल सुलभ करणे", "स्नायू आणि नसांना बळकट करणे"]
+      },
+      {
+        id: "shirodhara",
+        title: "शिरोधारा आणि तणावमुक्ती",
+        desc: "मज्जासंस्था शांत करण्यासाठी कपाळावर कोमट औषधी तेलाची संतत धार सोडणे.",
+        image: "/shirodhara_stress_relief.png",
+        benefits: ["चिंता आणि निद्रानाश दूर करणे", "अर्धशिशी (मायग्रेन) मध्ये आराम", "लक्ष केंद्रित करण्याची क्षमता व झोपेची गुणवत्ता सुधारणे"]
+      },
+      {
+        id: "lifestyle",
+        title: "जीवनशैलीचे आजार",
+        desc: "मधुमेह, उच्च रक्तदाब, थायरॉईड, पीसीओएस (PCOS) — औषधी वनस्पती आणि दिनचर्येद्वारे नियंत्रण.",
+        image: "/lifestyle_disorders.png",
+        benefits: ["नैसर्गिकरित्या रक्तदाब व साखर नियंत्रणात ठेवणे", "हार्मोन्सचे संतुलन", "शाश्वत वजन व्यवस्थापन"]
+      },
+      {
+        id: "respiratory",
+        title: "श्वसन विकार काळजी",
+        desc: "नस्य, वाफ आणि औषधी उपचारांद्वारे दमा, सायनुसायटिस आणि तीव्र खोकल्यावर उपचार.",
+        image: "/respiratory_care.png",
+        benefits: ["श्वसनमार्ग आणि सायनस मोकळे करणे", "अॅलर्जीचा त्रास कमी करणे", "फुफ्फुसांची कार्यक्षमता वाढवणे"]
+      },
+      {
+        id: "skin_hair",
+        title: "त्वचा आणि केसांची काळजी",
+        desc: "रक्तशुद्धीकरणाद्वारे (रक्तमोक्षण) सोरायसिस, एक्जिमा, मुरुम आणि केस गळतीवर उपचार.",
+        image: "/skin_hair_care.png",
+        benefits: ["स्वच्छ आणि निरोगी त्वचा", "केस गळती आणि कोंडा कमी करणे", "जुनाट आजारांना कायमचे दूर ठेवणे"]
+      },
+      {
+        id: "garbhasanskar",
+        title: "गर्भसंस्कार",
+        desc: "आई आणि बाळासाठी गर्भधारणापूर्व, गर्भधारणा काळ आणि बाळंतपणानंतरची विशेष काळजी.",
+        image: "/garbhasanskar.png",
+        benefits: ["निरोगी आणि सुरक्षित गर्भधारणा", "बाळाची रोगप्रतिकारक शक्ती वाढवणे", "बाळंतपणानंतर जलद प्रकृती सुधारणे"]
+      }
+    ],
 
     // Appointment Booking Page
     bookTitle: "भेटण्याची वेळ निश्चित करा",
@@ -295,7 +411,7 @@ export const translations = {
     contactTitle: "संपर्क साधा",
     contactSubtitle: "क्लिनिकला भेट द्या किंवा फोन आणि व्हॉट्सअॅपद्वारे संपर्क साधा.",
     addressLabel: "पत्ता",
-    addressVal: "डॉ. प्रवीण चौधरी हॉस्पिटलजवळ, राजन मेडिकल शेजारी, पांढुर्णा चौक, कारंजा.",
+    addressVal: "F7G9+JPF, वरुड, महाराष्ट्र 444906",
     phoneLabel: "फोन नंबर",
     phoneVal: "+91 9145331731",
     hoursLabel: "क्लिनिकची वेळ",
@@ -391,38 +507,96 @@ export const translations = {
     specialty3: "पेट एवं पाचन तंत्र के पुराने रोग",
     specialty4: "नसों का दर्द एवं पुनर्वास चिकित्सा",
 
-    // Diseases & Treatments
-    treatmentTitle: "उपचार एवं व्याधियां",
-    treatmentSubtitle: "पुराने रोगों और जीवनशैली से जुड़ी बीमारियों के लिए विशेष आयुर्वेदिक देखभाल।",
-    orthoCategory: "अस्थिरोग एवं नसों के विकार",
-    orthoDesc: "बिना सर्जरी के प्राकृतिक रूप से दर्द से राहत, पुनर्जीवन और नसों का उपचार।",
-    otherCategory: "पाचन एवं अन्य स्वास्थ्य विकार",
-    otherDesc: "जठराग्नि को मजबूत करना, शरीर से हानिकारक पदार्थों को निकालना और अंगों को स्वस्थ बनाना।",
+    // Diseases & Treatments / Services
+    treatmentTitle: "हमारी विशेष सेवाएं",
+    treatmentSubtitle: "हमारे प्रामाणिक आयुर्वेदिक नैदानिक विभागों और समग्र कल्याण चिकित्सा पद्धतियों का अन्वेषण करें।",
+    clinicalSpecialtiesCategory: "विशेष नैदानिक विभाग (क्लिनिकल विभाग)",
+    clinicalSpecialtiesDesc: "प्रामाणिक आयुर्वेदिक विशेष निदान और नैदानिक उपचार विभाग।",
+    wellnessTherapiesCategory: "स्वास्थ्य, कल्याण एवं संबद्ध चिकित्सा",
+    wellnessTherapiesDesc: "स्वास्थ्य को बहाल करने, रोग प्रतिरोधक क्षमता बढ़ाने और जीवन शक्ति बनाए रखने के समग्र दृष्टिकोण।",
     readMore: "अधिक जानकारी",
 
-    // Diseases translation mapping
-    spondylosis: "स्पॉन्डिलाइतस (रीढ़ की हड्डी का रोग)",
-    cordCompression: "रीढ़ की नस दबना",
-    tinglingNumbness: "हाथ-पैरों में झुनझुनी / सुन्नपन",
-    arthritisRheumatism: "गठिया / आमवात",
-    kneeDegeneration: "घुटनों का दर्द / घुटने घिसना",
-    osteoporosis: "ऑस्टियोपोरोसिस (हड्डियों की कमजोरी)",
-    paralysis: "लकवा (पैरालिसिस)",
-    jointSwellingGout: "जोड़ों में सूजन / गाउट",
-    neckBackPain: "कमर और गर्दन का दर्द / स्लिप डिस्क",
-    dizzinessBalance: "चक्कर आना / संतुलन खोना",
-    stomachDiseases: "पेट के विभिन्न रोग",
-    postOpComplications: "सर्जरी के बाद की जटिलताएं",
-    sciatica: "साइटिका (कमर से पैर का दर्द)",
-    frozenShoulder: "कंधा जकड़ना (फ्रोजन शोल्डर)",
-    waistToLegsNervePain: "कमर से पैरों तक नसों का खिंचाव",
-    neckToLegsNervePain: "गर्दन से हाथों तक नसों का दर्द",
-    handLegTingling: "हाथों और पैरों में भारीपन आना",
-    appetiteIndigestion: "भूख न लगना / अपचन",
-    acidity: "अम्लपित्त (एसिडिटी)",
-    chestBurning: "सीने में जलन होना",
-    constipationBowel: "कब्ज / पेट साफ न होना",
-    pilesFistula: "बवासीर और भगंदर (फिस्टुला)",
+    // Services translation mapping
+    panchakarma: "पंचकर्म (शरीर शुद्धि एवं विषहरण)",
+    kayachikitsa: "कायचिकित्सा (सामान्य चिकित्सा)",
+    shalyaTantra: "शल्य तंत्र (आयुर्वेदिक शल्यकर्म एवं क्षारसूत्र)",
+    shalakyaTantra: "शालाक्य तंत्र (ईएनटी और नेत्र रोग)",
+    dravyaguna: "द्रव्यगुण विज्ञान (जड़ी-बूटी औषधशास्त्र)",
+    rasashastra: "रसशास्त्र (हर्बो-मिनरल औषधि निर्माण)",
+    bhaishajyaKalpana: "भैषज्य कल्पना (औषध निर्माण शास्त्र)",
+    agadaTantra: "अगद तंत्र (विष विज्ञान)",
+    swasthavritta: "स्वस्थवृत्त (योग, आहार एवं जीवन शैली)",
+    marmaTherapy: "मर्म चिकित्सा (ऊर्जा बिंदु चिकित्सा)",
+    yogaTherapy: "योग चिकित्सा (योगोपचार)",
+    naturopathy: "प्राकृतिक चिकित्सा (नेचरोपैथी)",
+    rasayanaTherapy: "रसायन चिकित्सा (कायाकल्प एवं दीर्घायु)",
+    vajikaranaTherapy: "वाजीकरण चिकित्सा (प्रजनन स्वास्थ्य एवं कामोद्दीपक)",
+    keyBenefits: "प्रमुख लाभ",
+    servicesData: [
+      {
+        id: "consultation",
+        title: "आयुर्वेदिक परामर्श",
+        desc: "व्यक्तिगत उपचार योजना के साथ विस्तृत प्रकृति और विकृति विश्लेषण।",
+        image: "/ayurvedic_consultation.png",
+        benefits: ["असंतुलन के मूल कारण की पहचान", "व्यक्तिगत आहार और जीवन शैली योजना", "सुरक्षित और दवा-मुक्त मार्गदर्शन"]
+      },
+      {
+        id: "panchakarma",
+        title: "पंचकर्म चिकित्सा",
+        desc: "शास्त्रीय पंचविध शरीर शुद्धि एवं विषहरण — वमन, विरेचन, बस्ती, नस्य, रक्तमोक्षण।",
+        image: "/panchakarma_therapy.png",
+        benefits: ["गहरी कोशिकीय शुद्धि (डिटॉक्स)", "रोग प्रतिरोधक क्षमता और जीवन शक्ति को बढ़ावा", "तीनों दोषों (वात-पित्त-कफ) का संतुलन", "पुराने रोगों से राहत"]
+      },
+      {
+        id: "agnikarma",
+        title: "अग्निकर्म एवं क्षारसूत्र",
+        desc: "बवासीर, भगंदर और पुराने जोड़ों के दर्द के लिए पारंपरिक आयुर्वेदिक शल्यकर्म एवं क्षारसूत्र उपचार।",
+        image: "/agnikarma_kshara_sutra.png",
+        benefits: ["न्यूनतम आक्रामक (अल्प शल्यक्रिया)", "अस्पताल में भर्ती होने की आवश्यकता नहीं", "बवासीर और भगंदर में स्थायी राहत"]
+      },
+      {
+        id: "joint_spine",
+        title: "जोड़ों एवं रीढ़ की देखभाल",
+        desc: "गठिया, सायटिका और पीठ दर्द के लिए कटिबस्ती, जानुबस्ती, पिळिच्चिल और अभ्यंग उपचार।",
+        image: "/joint_spine_care.png",
+        benefits: ["दर्द and अकड़न में कमी", "गतिशीलता में सुधार", "मांसपेशियों और नसों को मजबूती"]
+      },
+      {
+        id: "shirodhara",
+        title: "शिरोधारा एवं तनाव मुक्ति",
+        desc: "तंत्रिका तंत्र को शांत करने के लिए माथे पर गुनगुने औषधीय तेल की धारा गिराना।",
+        image: "/shirodhara_stress_relief.png",
+        benefits: ["चिंता और अनिद्रा से राहत", "माइग्रेन (अर्धशिशी) में आराम", "एकाग्रता और नींद की गुणवत्ता में सुधार"]
+      },
+      {
+        id: "lifestyle",
+        title: "जीवनशैली विकार",
+        desc: "मधुमेह, उच्च रक्तदाब, थायराइड, पीसीओएस (PCOS) — जड़ी-बूटियों और दिनचर्या द्वारा समग्र प्रबंधन।",
+        image: "/lifestyle_disorders.png",
+        benefits: ["प्राकृतिक रूप से रक्त शर्करा और बीपी को कम करना", "हार्मोनल संतुलन", "सतत वजन प्रबंधन"]
+      },
+      {
+        id: "respiratory",
+        title: "श्वसन तंत्र की देखभाल",
+        desc: "नस्य, भाप और जड़ी-बूटियों के द्वारा दमा, साइनस और पुरानी खांसी का उपचार।",
+        image: "/respiratory_care.png",
+        benefits: ["श्वसन मार्ग और साइनस को साफ करना", "एलर्जी के दौरों को कम करना", "फेफड़ों की क्षमता को मजबूत करना"]
+      },
+      {
+        id: "skin_hair",
+        title: "त्वचा एवं बालों की देखभाल",
+        desc: "रक्त शोधन (रक्तमोक्षण) द्वारा सोरायसिस, एक्जिमा, मुंहासे और बालों के झड़ने का प्रबंधन।",
+        image: "/skin_hair_care.png",
+        benefits: ["साफ और स्वस्थ त्वचा", "बालों का झड़ना और रूसी कम करना", "पुराने रोगों से दीर्घकालिक राहत"]
+      },
+      {
+        id: "garbhasanskar",
+        title: "गर्भसंस्कार",
+        desc: "मां और बच्चे के लिए गर्भाधान पूर्व, गर्भावस्था और प्रसवोत्तर विशेष देखभाल।",
+        image: "/garbhasanskar.png",
+        benefits: ["स्वस्थ और सुरक्षित गर्भावस्था", "बच्चे की मजबूत रोग प्रतिरोधक क्षमता", "प्रसव के बाद त्वरित स्वास्थ्य सुधार"]
+      }
+    ],
 
     // Appointment Booking Page
     bookTitle: "परामर्श बुक करें",
@@ -471,7 +645,7 @@ export const translations = {
     contactTitle: "संपर्क सूत्र",
     contactSubtitle: "हमारे क्लिनिक पर आएं या फोन और व्हाट्सएप के माध्यम से संपर्क करें।",
     addressLabel: "पता",
-    addressVal: "डॉ. प्रवीण चौधरी हॉस्पिटल के पास, राजन मेडिकल के बगल में, पांढुर्णा चौक, कारंजा।",
+    addressVal: "F7G9+JPF, वरुड, महाराष्ट्र 444906",
     phoneLabel: "फ़ोन नंबर",
     phoneVal: "+91 9145331731",
     hoursLabel: "क्लिनिक का समय",

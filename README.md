@@ -23,28 +23,58 @@ Features dynamic multilingual support (English, Marathi, Hindi), dark/light mode
 p2/
 ├── backend/
 │   ├── config/
+│   │   └── db.js               # MongoDB connection
 │   ├── controllers/
+│   │   ├── appointmentController.js
+│   │   └── authController.js
 │   ├── middleware/
+│   │   ├── authMiddleware.js   # JWT and doctor role verification
+│   │   └── errorMiddleware.js  # Centralized API error handling
 │   ├── models/
+│   │   ├── Appointment.js
+│   │   ├── Notification.js
+│   │   └── User.js
 │   ├── routes/
+│   │   ├── appointmentRoutes.js
+│   │   └── authRoutes.js
+│   ├── uploads/                # Static local uploaded avatars (Git ignored/Created on start)
 │   ├── utils/
-│   ├── uploads/
-│   ├── .env
+│   │   └── emailService.js     # Nodemailer template service
+│   ├── .env                    # Environment keys
+│   ├── .env.example
 │   ├── package.json
-│   └── server.js
+│   └── server.js               # Express app entry
 │
 └── frontend/
     ├── public/
+    │   └── doctor_avatar.png   # Generated hero illustration
     ├── src/
     │   ├── components/
+    │   │   ├── Footer.jsx
+    │   │   ├── Navbar.jsx
+    │   │   ├── ProtectedRoute.jsx
+    │   │   └── WhatsAppButton.jsx
     │   ├── context/
+    │   │   ├── AuthContext.jsx
+    │   │   ├── LanguageContext.jsx
+    │   │   ├── ThemeContext.jsx
+    │   │   └── ToastContext.jsx
     │   ├── pages/
+    │   │   ├── Home.jsx
+    │   │   ├── Login.jsx
+    │   │   ├── NotFound.jsx
+    │   │   ├── PatientDashboard.jsx
+    │   │   ├── DoctorDashboard.jsx
+    │   │   └── Register.jsx
     │   ├── translations/
-    │   ├── App.jsx
-    │   ├── main.jsx
-    │   └── index.css
+    │   │   └── translations.js # Multilingual dictionary mappings
+    │   ├── App.jsx             # React routing
+    │   ├── index.css           # Tailwind layers + custom animations
+    │   └── main.jsx
     ├── tailwind.config.js
+    ├── postcss.config.js
     ├── vite.config.js
+    ├── index.html
     └── package.json
 ```
 
