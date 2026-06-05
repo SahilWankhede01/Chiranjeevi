@@ -7,8 +7,36 @@ import { useTheme } from '../context/ThemeContext';
 import { useToast } from '../context/ToastContext';
 import Logo from './Logo';
 
+const parseNotification = (message) => {
+  if (!message) return null;
+  // Pattern: A new appointment has been requested by [fullName] for [preferredDate] at [preferredTime]. Reason/Symptoms: [disease]
+  const bookingMatch = message.match(/A new appointment has been requested by (.*?) for (.*?) at (.*?)\. Reason\/Symptoms: (.*)$/);
+  if (bookingMatch) {
+    return {
+      isBooking: true,
+      patientName: bookingMatch[1],
+      date: bookingMatch[2],
+      time: bookingMatch[3],
+      reason: bookingMatch[4]
+    };
+  }
+  
+  // Pattern: Appointment for [fullName] scheduled on [date] was cancelled by the patient.
+  const cancelMatch = message.match(/Appointment for (.*?) scheduled on (.*?) was cancelled by the patient\./);
+  if (cancelMatch) {
+    return {
+      isCancel: true,
+      patientName: cancelMatch[1],
+      date: cancelMatch[2],
+      reason: 'Cancelled by Patient'
+    };
+  }
+  
+  return null;
+};
+
 const Navbar = () => {
-  const { user, logout, notifications, markNotificationAsRead } = useAuth();
+  const { user, logout, notifications, fetchNotifications, markNotificationAsRead } = useAuth();
   const { language, setLanguage, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const { showToast } = useToast();
@@ -17,6 +45,17 @@ const Navbar = () => {
   const [langOpen, setLangOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
+  // Poll every 30 seconds for new notifications (doctor role only)
+  useEffect(() => {
+    if (user && user.role === 'doctor') {
+      fetchNotifications();
+      const interval = setInterval(() => {
+        fetchNotifications();
+      }, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [user, fetchNotifications]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -158,8 +197,8 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Notifications Dropdown (Authenticated Users) */}
-            {user && (
+            {/* Notifications Dropdown (Doctor Only) */}
+            {user && user.role === 'doctor' && (
               <div className="relative" ref={notifRef}>
                 <button
                   onClick={() => setNotifOpen(!notifOpen)}
@@ -168,14 +207,14 @@ const Navbar = () => {
                 >
                   <Bell size={20} />
                   {unreadCount > 0 && (
-                    <span className="absolute top-1 right-1 bg-ayurveda-saffron-500 text-white font-bold text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center animate-bounce">
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white font-bold text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-md animate-pulse">
                       {unreadCount}
                     </span>
                   )}
                 </button>
 
                 {notifOpen && (
-                  <div className="absolute right-0 mt-2 w-80 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800/80 shadow-2xl p-4 z-50 animate-fade-in max-h-96 overflow-y-auto">
+                  <div className="absolute right-0 mt-2 w-85 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800/80 shadow-2xl p-4 z-50 animate-fade-in max-h-96 overflow-y-auto">
                     <div className="flex justify-between items-center pb-2 border-b border-slate-100 dark:border-zinc-800">
                       <h4 className="font-bold text-sm text-slate-800 dark:text-zinc-200">{t('notifications')}</h4>
                       <span className="text-xs bg-slate-100 dark:bg-zinc-800 px-2 py-0.5 rounded-full text-slate-500">{unreadCount} unread</span>
@@ -184,17 +223,51 @@ const Navbar = () => {
                       {notifications.length === 0 ? (
                         <p className="text-xs text-center text-slate-400 py-4">No notifications yet.</p>
                       ) : (
-                        notifications.map((n) => (
-                          <div
-                            key={n._id}
-                            onClick={() => handleNotificationClick(n._id)}
-                            className={`p-2.5 rounded-lg border text-left cursor-pointer transition-all duration-200 ${n.isRead ? 'bg-slate-50/50 dark:bg-zinc-900/30 border-transparent text-slate-400' : 'bg-green-50/30 dark:bg-emerald-950/10 border-green-100 dark:border-emerald-900/20 text-slate-700 dark:text-zinc-300'}`}
-                          >
-                            <p className="font-bold text-xs">{n.title}</p>
-                            <p className="text-[11px] leading-relaxed mt-0.5">{n.message}</p>
-                            <span className="text-[9px] text-slate-400 block mt-1">{new Date(n.createdAt).toLocaleDateString()}</span>
-                          </div>
-                        ))
+                        notifications.map((n) => {
+                          const parsed = parseNotification(n.message);
+                          return (
+                            <div
+                              key={n._id}
+                              className={`p-3 rounded-xl border text-left transition-all duration-200 ${n.isRead ? 'bg-slate-50/50 dark:bg-zinc-900/30 border-transparent text-slate-400' : 'bg-green-50/30 dark:bg-emerald-950/10 border-green-100 dark:border-emerald-900/20 text-slate-700 dark:text-zinc-300'}`}
+                            >
+                              <div className="flex justify-between items-start mb-1">
+                                <p className="font-bold text-xs flex items-center gap-1.5">
+                                  {parsed?.isBooking ? (
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                                  ) : parsed?.isCancel ? (
+                                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block"></span>
+                                  ) : (
+                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block"></span>
+                                  )}
+                                  {n.title}
+                                </p>
+                                {!n.isRead && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      markNotificationAsRead(n._id);
+                                    }}
+                                    className="text-[10px] text-ayurveda-green-600 dark:text-ayurveda-green-400 font-bold hover:underline shrink-0 ml-2"
+                                  >
+                                    Mark Read
+                                  </button>
+                                )}
+                              </div>
+
+                              {parsed ? (
+                                <div className="text-[11px] space-y-0.5 mt-1 font-medium">
+                                  <p><span className="text-slate-400 dark:text-zinc-500 font-bold">Patient:</span> {parsed.patientName}</p>
+                                  <p><span className="text-slate-400 dark:text-zinc-500 font-bold">Date & Time:</span> {parsed.date} {parsed.time ? `at ${parsed.time}` : ''}</p>
+                                  <p><span className="text-slate-400 dark:text-zinc-500 font-bold">Reason:</span> {parsed.reason}</p>
+                                </div>
+                              ) : (
+                                <p className="text-[11px] leading-relaxed mt-1">{n.message}</p>
+                              )}
+                              
+                              <span className="text-[9px] text-slate-400 block mt-1.5">{new Date(n.createdAt).toLocaleDateString()}</span>
+                            </div>
+                          );
+                        })
                       )}
                     </div>
                   </div>

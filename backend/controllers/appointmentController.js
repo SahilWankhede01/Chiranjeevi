@@ -1,7 +1,7 @@
 const Appointment = require('../models/Appointment');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
-const sendEmail = require('../utils/emailService');
+const { sendEmail, sendAppointmentNotificationToDoctor } = require('../utils/emailService');
 
 // @desc    Book a new appointment
 // @route   POST /api/appointments
@@ -31,67 +31,91 @@ const bookAppointment = async (req, res, next) => {
     });
 
     // Create Notification for the Patient
-    await Notification.create({
-      user: req.user._id,
-      title: 'Appointment Booked Successfully',
-      message: `Your appointment request for ${preferredDate} at ${preferredTime} has been submitted. Status: Pending.`,
-    });
-
-    // Find doctors and create notifications for them
-    const doctors = await User.find({ role: 'doctor' });
-    for (const doc of doctors) {
+    try {
       await Notification.create({
-        user: doc._id,
-        title: 'New Appointment Booking',
-        message: `A new appointment has been requested by ${fullName} for ${preferredDate} at ${preferredTime}.`,
+        user: req.user._id,
+        title: 'Appointment Booked Successfully',
+        message: `Your appointment request for ${preferredDate} at ${preferredTime} has been submitted. Status: Pending.`,
       });
+    } catch (patientNotifError) {
+      console.error('In-app notification for patient failed', patientNotifError);
+    }
+
+    // 1. IN-APP NOTIFICATION for Doctor (Real-time bell icon)
+    try {
+      const doctors = await User.find({ role: 'doctor' });
+      for (const doc of doctors) {
+        await Notification.create({
+          user: doc._id,
+          title: 'New Appointment Booking',
+          message: `A new appointment has been requested by ${fullName} for ${preferredDate} at ${preferredTime}. Reason/Symptoms: ${disease}`,
+        });
+      }
+    } catch (doctorNotifError) {
+      console.error('In-app notification for doctor failed', doctorNotifError);
     }
 
     // Send email to Patient (if email configured)
-    await sendEmail({
-      to: req.user.email,
-      subject: 'Appointment Received - SHREE CHIRANJEEVI Ayurveda Clinic',
-      html: `
-        <h3>Dear ${req.user.name},</h3>
-        <p>We have received your appointment request at <strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong>.</p>
-        <p><strong>Appointment Details:</strong></p>
-        <ul>
-          <li><strong>Patient Name:</strong> ${fullName}</li>
-          <li><strong>Preferred Date:</strong> ${preferredDate}</li>
-          <li><strong>Preferred Time Slot:</strong> ${preferredTime}</li>
-          <li><strong>Disease/Problem:</strong> ${disease}</li>
-          <li><strong>Status:</strong> Pending approval</li>
-        </ul>
-        <p>Dr. Yatesh Naresh Gahukar will review your request shortly. You will receive an email update once your booking is approved or processed.</p>
-        <br/>
-        <p>Warm regards,</p>
-        <p><strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong></p>
-      `,
-    });
+    try {
+      await sendEmail({
+        to: req.user.email,
+        subject: 'Appointment Received - SHREE CHIRANJEEVI Ayurveda Clinic',
+        html: `
+          <h3>Dear ${req.user.name},</h3>
+          <p>We have received your appointment request at <strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong>.</p>
+          <p><strong>Appointment Details:</strong></p>
+          <ul>
+            <li><strong>Patient Name:</strong> ${fullName}</li>
+            <li><strong>Preferred Date:</strong> ${preferredDate}</li>
+            <li><strong>Preferred Time Slot:</strong> ${preferredTime}</li>
+            <li><strong>Disease/Problem:</strong> ${disease}</li>
+            <li><strong>Status:</strong> Pending approval</li>
+          </ul>
+          <p>Dr. Yatesh Naresh Gahukar will review your request shortly. You will receive an email update once your booking is approved or processed.</p>
+          <br/>
+          <p>Warm regards,</p>
+          <p><strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong></p>
+        `,
+      });
+    } catch (patientEmailError) {
+      console.error('Patient email notification failed', patientEmailError);
+    }
 
-    // Send email notification to Doctor
-    const doctorMailTarget = process.env.DOCTOR_EMAIL || 'yateshgahukar@gmail.com';
-    await sendEmail({
-      to: doctorMailTarget,
-      subject: `New Appointment Request - ${fullName}`,
-      html: `
-        <h3>New Consultation Request</h3>
-        <p>A new appointment has been scheduled by a patient on the online portal.</p>
-        <ul>
-          <li><strong>Patient Name:</strong> ${fullName} (${age} years, ${gender})</li>
-          <li><strong>Contact:</strong> ${mobileNumber}</li>
-          <li><strong>Preferred Date:</strong> ${preferredDate}</li>
-          <li><strong>Preferred Time Slot:</strong> ${preferredTime}</li>
-          <li><strong>Disease/Problem:</strong> ${disease}</li>
-        </ul>
-        <p>Please log in to your admin panel dashboard to Approve or Reject this request.</p>
-      `,
-    });
+    // 2. EMAIL NOTIFICATION to Doctor (Nodemailer)
+    try {
+      await sendAppointmentNotificationToDoctor({
+        patientName: fullName,
+        patientPhone: mobileNumber,
+        patientEmail: req.user.email,
+        date: preferredDate,
+        time: preferredTime,
+        symptoms: disease,
+      });
+    } catch (doctorEmailError) {
+      console.error('Doctor email notification failed', doctorEmailError);
+    }
+
+    // 3. WHATSAPP NOTIFICATION LINK GENERATION
+    let waLink = '';
+    try {
+      const whatsappPhone = process.env.WHATSAPP_PHONE || '919145331731';
+      const formattedDate = new Date(preferredDate).toLocaleDateString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+      const waMessage = `🏥 New Appointment Request!\nPatient: ${fullName}\nDate: ${formattedDate}\nTime: ${preferredTime}\nReason: ${disease}\nPlease login to dashboard to confirm.`;
+      waLink = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(waMessage)}`;
+    } catch (waError) {
+      console.error('WhatsApp link generation failed', waError);
+    }
 
     res.status(201).json({
       success: true,
       message: 'Appointment request submitted successfully',
       data: appointment,
+      waLink, // Return the WhatsApp link to the frontend
     });
   } catch (error) {
     next(error);

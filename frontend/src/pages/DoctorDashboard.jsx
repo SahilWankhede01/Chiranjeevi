@@ -21,6 +21,32 @@ import {
   AlertCircle
 } from 'lucide-react';
 
+const parseNotification = (message) => {
+  if (!message) return null;
+  const bookingMatch = message.match(/A new appointment has been requested by (.*?) for (.*?) at (.*?)\. Reason\/Symptoms: (.*)$/);
+  if (bookingMatch) {
+    return {
+      isBooking: true,
+      patientName: bookingMatch[1],
+      date: bookingMatch[2],
+      time: bookingMatch[3],
+      reason: bookingMatch[4]
+    };
+  }
+  
+  const cancelMatch = message.match(/Appointment for (.*?) scheduled on (.*?) was cancelled by the patient\./);
+  if (cancelMatch) {
+    return {
+      isCancel: true,
+      patientName: cancelMatch[1],
+      date: cancelMatch[2],
+      reason: 'Cancelled by Patient'
+    };
+  }
+  
+  return null;
+};
+
 const DoctorDashboard = () => {
   const { t } = useLanguage();
   const { showToast } = useToast();
@@ -492,27 +518,49 @@ const DoctorDashboard = () => {
                 <p className="text-slate-400 text-xs font-semibold">No notifications log found.</p>
               </div>
             ) : (
-              notifications.map((n) => (
-                <div
-                  key={n._id}
-                  className={`p-4 rounded-2xl border flex justify-between items-start gap-4 transition-all duration-200 ${n.isRead ? 'bg-slate-50/50 dark:bg-zinc-950/20 border-slate-100 dark:border-zinc-850 text-slate-400' : 'bg-green-50/30 dark:bg-emerald-950/15 border-green-100/50 dark:border-emerald-900/35 text-slate-700 dark:text-zinc-250'}`}
-                >
-                  <div className="space-y-1">
-                    <p className="font-bold text-xs">{n.title}</p>
-                    <p className="text-[11px] leading-relaxed font-medium">{n.message}</p>
-                    <span className="text-[9px] text-slate-450 block mt-1">{new Date(n.createdAt).toLocaleString()}</span>
-                  </div>
+              notifications.map((n) => {
+                const parsed = parseNotification(n.message);
+                return (
+                  <div
+                    key={n._id}
+                    className={`p-4 rounded-2xl border flex justify-between items-start gap-4 transition-all duration-200 ${n.isRead ? 'bg-slate-50/50 dark:bg-zinc-950/20 border-slate-100 dark:border-zinc-850 text-slate-400' : 'bg-green-50/30 dark:bg-emerald-950/15 border-green-100/50 dark:border-emerald-900/35 text-slate-700 dark:text-zinc-250'}`}
+                  >
+                    <div className="space-y-1.5 text-left flex-1">
+                      <div className="flex items-center gap-2">
+                        {parsed?.isBooking ? (
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
+                        ) : parsed?.isCancel ? (
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block"></span>
+                        ) : (
+                          <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block"></span>
+                        )}
+                        <p className="font-bold text-xs">{n.title}</p>
+                      </div>
 
-                  {!n.isRead && (
-                    <button
-                      onClick={() => markNotificationAsRead(n._id)}
-                      className="text-[10px] text-ayurveda-green-600 dark:text-ayurveda-green-400 font-bold hover:underline shrink-0"
-                    >
-                      {t('markRead')}
-                    </button>
-                  )}
-                </div>
-              ))
+                      {parsed ? (
+                        <div className="text-[11px] space-y-0.5 font-medium pl-3.5 text-slate-650 dark:text-zinc-350">
+                          <p><span className="text-slate-400 dark:text-zinc-500 font-bold">Patient Name:</span> {parsed.patientName}</p>
+                          <p><span className="text-slate-400 dark:text-zinc-500 font-bold">Requested Date & Time:</span> {parsed.date} {parsed.time ? `at ${parsed.time}` : ''}</p>
+                          <p><span className="text-slate-400 dark:text-zinc-500 font-bold">Reason/Symptoms:</span> {parsed.reason}</p>
+                        </div>
+                      ) : (
+                        <p className="text-[11px] leading-relaxed pl-3.5">{n.message}</p>
+                      )}
+                      
+                      <span className="text-[9px] text-slate-400 block pl-3.5 mt-1">{new Date(n.createdAt).toLocaleString()}</span>
+                    </div>
+
+                    {!n.isRead && (
+                      <button
+                        onClick={() => markNotificationAsRead(n._id)}
+                        className="text-[10px] text-ayurveda-green-600 dark:text-ayurveda-green-400 font-bold hover:underline shrink-0"
+                      >
+                        {t('markRead')}
+                      </button>
+                    )}
+                  </div>
+                );
+              })
             )}
           </div>
         </div>
