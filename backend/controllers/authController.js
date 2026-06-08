@@ -16,20 +16,30 @@ const registerUser = async (req, res, next) => {
   try {
     const { name, email, password, phone, age, gender, role } = req.body;
 
-    const userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ email: email.toLowerCase() });
 
     if (userExists) {
       res.status(400);
-      throw new Error('User already exists');
+      throw new Error('A user with this email address is already registered.');
     }
 
-    // Determine role. Enforce 'patient' unless email matches one of the allowed doctor emails
+    // Determine role
     let assignedRole = 'patient';
-    const doctorEmailsEnv = process.env.DOCTOR_EMAILS || process.env.DOCTOR_EMAIL || 'yateshgahukar@gmail.com';
+    const doctorEmailsEnv = process.env.DOCTOR_EMAILS || 'yateshgahukar@gmail.com,sahilwankhade0204@gmail.com,chiranjeeviayurveda1@gmail.com';
     const allowedDoctorEmails = doctorEmailsEnv.split(',').map(e => e.trim().toLowerCase());
-    
-    if (allowedDoctorEmails.includes(email.toLowerCase())) {
+
+    if (role === 'doctor') {
+      if (!allowedDoctorEmails.includes(email.toLowerCase())) {
+        res.status(400);
+        throw new Error('This email address is not authorized to register as a doctor.');
+      }
       assignedRole = 'doctor';
+    } else {
+      // If they try to register as a patient with an authorized doctor's email, prevent it
+      if (allowedDoctorEmails.includes(email.toLowerCase())) {
+        res.status(400);
+        throw new Error('This email is reserved for doctor accounts. Please register as a doctor.');
+      }
     }
 
     const user = await User.create({

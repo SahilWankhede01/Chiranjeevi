@@ -160,6 +160,19 @@ const Register = () => {
             </div>
           </div>
 
+          {/* Role selection */}
+          <div className="relative">
+            <label className="block text-[11px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-1.5 text-left">Register As</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 dark:text-zinc-300 transition-all"
+            >
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor (Requires Authorized Email)</option>
+            </select>
+          </div>
+
           {/* Age & Gender Side by Side */}
           <div className="grid grid-cols-2 gap-4">
             <div>
