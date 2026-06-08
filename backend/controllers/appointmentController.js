@@ -55,45 +55,41 @@ const bookAppointment = async (req, res, next) => {
       console.error('In-app notification for doctor failed', doctorNotifError);
     }
 
-    // Send email to Patient (if email configured)
-    try {
-      await sendEmail({
-        to: req.user.email,
-        subject: 'Appointment Received - SHREE CHIRANJEEVI Ayurveda Clinic',
-        html: `
-          <h3>Dear ${req.user.name},</h3>
-          <p>We have received your appointment request at <strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong>.</p>
-          <p><strong>Appointment Details:</strong></p>
-          <ul>
-            <li><strong>Patient Name:</strong> ${fullName}</li>
-            <li><strong>Preferred Date:</strong> ${preferredDate}</li>
-            <li><strong>Preferred Time Slot:</strong> ${preferredTime}</li>
-            <li><strong>Disease/Problem:</strong> ${disease}</li>
-            <li><strong>Status:</strong> Pending approval</li>
-          </ul>
-          <p>Dr. Yatesh Naresh Gahukar will review your request shortly. You will receive an email update once your booking is approved or processed.</p>
-          <br/>
-          <p>Warm regards,</p>
-          <p><strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong></p>
-        `,
-      });
-    } catch (patientEmailError) {
+    // Send email to Patient (if email configured) - Asynchronously in background
+    sendEmail({
+      to: req.user.email,
+      subject: 'Appointment Received - SHREE CHIRANJEEVI Ayurveda Clinic',
+      html: `
+        <h3>Dear ${req.user.name},</h3>
+        <p>We have received your appointment request at <strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong>.</p>
+        <p><strong>Appointment Details:</strong></p>
+        <ul>
+          <li><strong>Patient Name:</strong> ${fullName}</li>
+          <li><strong>Preferred Date:</strong> ${preferredDate}</li>
+          <li><strong>Preferred Time Slot:</strong> ${preferredTime}</li>
+          <li><strong>Disease/Problem:</strong> ${disease}</li>
+          <li><strong>Status:</strong> Pending approval</li>
+        </ul>
+        <p>Dr. Yatesh Naresh Gahukar will review your request shortly. You will receive an email update once your booking is approved or processed.</p>
+        <br/>
+        <p>Warm regards,</p>
+        <p><strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong></p>
+      `,
+    }).catch((patientEmailError) => {
       console.error('Patient email notification failed', patientEmailError);
-    }
+    });
 
-    // 2. EMAIL NOTIFICATION to Doctor (Nodemailer)
-    try {
-      await sendAppointmentNotificationToDoctor({
-        patientName: fullName,
-        patientPhone: mobileNumber,
-        patientEmail: req.user.email,
-        date: preferredDate,
-        time: preferredTime,
-        symptoms: disease,
-      });
-    } catch (doctorEmailError) {
+    // 2. EMAIL NOTIFICATION to Doctor (Nodemailer) - Asynchronously in background
+    sendAppointmentNotificationToDoctor({
+      patientName: fullName,
+      patientPhone: mobileNumber,
+      patientEmail: req.user.email,
+      date: preferredDate,
+      time: preferredTime,
+      symptoms: disease,
+    }).catch((doctorEmailError) => {
       console.error('Doctor email notification failed', doctorEmailError);
-    }
+    });
 
     // 3. WHATSAPP NOTIFICATION LINK GENERATION
     let waLink = '';
@@ -264,8 +260,8 @@ const updateAppointmentStatus = async (req, res, next) => {
       message: `Your appointment request for ${new Date(appointment.preferredDate).toDateString()} is now ${status}. Remarks: ${doctorRemarks || 'None'}`,
     });
 
-    // Send Status Email Update to Patient
-    await sendEmail({
+    // Send Status Email Update to Patient - Asynchronously in background
+    sendEmail({
       to: appointment.patient.email,
       subject: `Appointment Status Update: ${status} - SHREE CHIRANJEEVI Clinic`,
       html: `
@@ -283,6 +279,8 @@ const updateAppointmentStatus = async (req, res, next) => {
         <p>Warm regards,</p>
         <p><strong>SHREE CHIRANJEEVI Ayurveda & Panchakarma Clinic</strong></p>
       `,
+    }).catch((statusEmailError) => {
+      console.error('Status email update failed', statusEmailError);
     });
 
     res.json({
