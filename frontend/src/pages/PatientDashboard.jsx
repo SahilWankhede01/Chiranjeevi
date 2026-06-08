@@ -106,14 +106,6 @@ const PatientDashboard = () => {
         setPreferredTime('');
         fetchAppointments();
         setActiveTab('bookings');
-
-        // Auto-open WhatsApp notification link in a new tab
-        if (res.data.waLink) {
-          const newWindow = window.open(res.data.waLink, '_blank', 'noopener,noreferrer');
-          if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
-            showToast('WhatsApp notification link was blocked. Please enable popups to send notification.', 'warning');
-          }
-        }
       }
     } catch (error) {
       showToast(error.response?.data?.message || 'Booking failed.', 'error');
