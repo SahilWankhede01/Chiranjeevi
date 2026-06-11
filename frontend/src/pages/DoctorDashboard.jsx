@@ -239,16 +239,16 @@ const DoctorDashboard = () => {
           
           {/* Doctor Info Capsule */}
           <div className="flex items-center gap-3.5 bg-slate-50/50 dark:bg-zinc-900/40 p-3.5 rounded-2xl border border-slate-100 dark:border-zinc-800">
-            <div className="w-11 h-11 rounded-full bg-emerald-50 dark:bg-zinc-850 text-ayurveda-green-700 dark:text-zinc-200 flex items-center justify-center font-extrabold text-base border-2 border-emerald-500">
+            <div className="w-11 h-11 rounded-full bg-emerald-50 dark:bg-zinc-800 text-ayurveda-green-700 dark:text-zinc-200 flex items-center justify-center font-extrabold text-base border-2 border-emerald-500">
               DG
             </div>
             <div className="truncate">
               <h4 className="font-extrabold text-xs text-slate-800 dark:text-zinc-100 truncate">Dr. Y. Gahukar</h4>
-              <span className="text-[9px] text-slate-400 dark:text-zinc-550 font-extrabold tracking-wider uppercase block mt-0.5">B.A.M.S., MD (Ayu)</span>
+              <span className="text-[9px] text-slate-400 dark:text-zinc-400 font-extrabold tracking-wider uppercase block mt-0.5">B.A.M.S., MD (Ayu)</span>
             </div>
           </div>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-850/80"></div>
+          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
 
           {/* Nav Links */}
           <nav className="flex flex-col gap-2">
@@ -268,7 +268,7 @@ const DoctorDashboard = () => {
             ))}
           </nav>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-850/80 mt-2"></div>
+          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80 mt-2"></div>
 
           {/* Quick Stats list */}
           {analytics && (
@@ -352,7 +352,7 @@ const DoctorDashboard = () => {
               </div>
 
               {/* Table */}
-              <div className="bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-850/80 rounded-2xl shadow-sm overflow-hidden">
+              <div className="bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800/80 rounded-2xl shadow-sm overflow-hidden">
                 {loading ? (
                   <div className="flex justify-center items-center py-20">
                     <div className="w-10 h-10 border-4 border-slate-200 border-t-ayurveda-green-600 rounded-full animate-spin"></div>
@@ -364,7 +364,7 @@ const DoctorDashboard = () => {
                   </div>
                 ) : (
                   <div className="overflow-x-auto text-left">
-                    <table className="min-w-full divide-y divide-slate-100 dark:divide-zinc-850">
+                    <table className="min-w-full divide-y divide-slate-100 dark:divide-zinc-800">
                       <thead className="bg-slate-50/50 dark:bg-zinc-950/20">
                         <tr>
                           <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Patient</th>
@@ -375,9 +375,9 @@ const DoctorDashboard = () => {
                           <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider text-right">Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-zinc-850 text-xs text-slate-700 dark:text-zinc-350">
+                      <tbody className="divide-y divide-slate-100 dark:divide-zinc-800 text-xs text-slate-700 dark:text-zinc-400">
                         {appointments.map((a) => (
-                          <tr key={a._id} className="hover:bg-slate-50/30 dark:hover:bg-zinc-850/20 transition-all">
+                          <tr key={a._id} className="hover:bg-slate-50/30 dark:hover:bg-zinc-800/20 transition-all">
                             
                             <td className="px-5 py-4 whitespace-nowrap">
                               <div className="flex items-center gap-3.5">
@@ -463,7 +463,7 @@ const DoctorDashboard = () => {
                 )}
 
                 {totalPages > 1 && (
-                  <div className="bg-slate-50/50 dark:bg-zinc-950/20 px-5 py-3.5 flex items-center justify-between border-t border-slate-100 dark:border-zinc-850">
+                  <div className="bg-slate-50/50 dark:bg-zinc-950/20 px-5 py-3.5 flex items-center justify-between border-t border-slate-100 dark:border-zinc-800">
                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Showing {appointments.length} of {totalRecords} records</span>
                     <div className="flex items-center gap-2">
                       <button
@@ -473,7 +473,7 @@ const DoctorDashboard = () => {
                       >
                         <ChevronLeft size={13} />
                       </button>
-                      <span className="text-xs font-bold text-slate-700 dark:text-zinc-350">Page {page} of {totalPages}</span>
+                      <span className="text-xs font-bold text-slate-700 dark:text-zinc-400">Page {page} of {totalPages}</span>
                       <button
                         onClick={() => setPage(p => Math.min(p + 1, totalPages))}
                         disabled={page === totalPages}
@@ -497,24 +497,24 @@ const DoctorDashboard = () => {
                 <h2 className="text-xl font-serif font-extrabold text-slate-800 dark:text-zinc-150">Weekly Interactive Planner</h2>
               </div>
 
-              <div className="bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-850/80 rounded-2xl shadow-sm p-5 overflow-hidden">
+              <div className="bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800/80 rounded-2xl shadow-sm p-5 overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-slate-100 dark:divide-zinc-800">
                     <thead>
                       <tr className="bg-slate-50/50 dark:bg-zinc-950/20">
                         <th className="px-3.5 py-3 text-left text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Time Slot</th>
                         {calendarDays.map((day, dIdx) => (
-                          <th key={dIdx} className="px-3.5 py-3 text-center text-[9px] font-extrabold text-slate-450 dark:text-zinc-300 uppercase tracking-widest">
+                          <th key={dIdx} className="px-3.5 py-3 text-center text-[9px] font-extrabold text-slate-400 dark:text-zinc-300 uppercase tracking-widest">
                             <span className="block">{day.toLocaleDateString(undefined, { weekday: 'short' })}</span>
                             <span className="block text-slate-800 dark:text-zinc-200 text-xs font-bold mt-0.5">{day.getDate()}</span>
                           </th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100 dark:divide-zinc-850 text-xs text-center font-bold">
+                    <tbody className="divide-y divide-slate-100 dark:divide-zinc-800 text-xs text-center font-bold">
                       {timeSlots.map((slot, sIdx) => (
                         <tr key={sIdx} className="hover:bg-slate-50/35 dark:hover:bg-zinc-955/20 transition-all">
-                          <td className="px-3.5 py-3.5 text-left font-extrabold text-slate-450 uppercase tracking-wider">{slot}</td>
+                          <td className="px-3.5 py-3.5 text-left font-extrabold text-slate-400 uppercase tracking-wider">{slot}</td>
                           {calendarDays.map((day, dIdx) => {
                             const app = findAppointmentBySlot(day, slot);
                             return (
@@ -545,7 +545,7 @@ const DoctorDashboard = () => {
               </div>
 
               {selectedSlotDetails && (
-                <div className="bg-gradient-to-tr from-white to-slate-50 dark:from-zinc-900 dark:to-zinc-950 p-5 rounded-2xl border border-slate-200 dark:border-zinc-850 shadow-md text-left max-w-lg mx-auto relative animate-fade-in">
+                <div className="bg-gradient-to-tr from-white to-slate-50 dark:from-zinc-900 dark:to-zinc-950 p-5 rounded-2xl border border-slate-200 dark:border-zinc-800 shadow-md text-left max-w-lg mx-auto relative animate-fade-in">
                   <button onClick={() => setSelectedSlotDetails(null)} className="absolute right-3.5 top-3.5 text-slate-400"><X size={15} /></button>
                   <div className="space-y-3">
                     <div className="flex justify-between items-start">
@@ -557,7 +557,7 @@ const DoctorDashboard = () => {
                       </div>
                       {getStatusBadge(selectedSlotDetails.status)}
                     </div>
-                    <div className="grid grid-cols-2 gap-4 border-y border-slate-100 dark:border-zinc-800/80 py-2.5 text-[11px] font-semibold text-slate-650 dark:text-zinc-350">
+                    <div className="grid grid-cols-2 gap-4 border-y border-slate-100 dark:border-zinc-800/80 py-2.5 text-[11px] font-semibold text-slate-600 dark:text-zinc-400">
                       <p>Date: {new Date(selectedSlotDetails.preferredDate).toDateString()}</p>
                       <p>Slot: {selectedSlotDetails.preferredTime}</p>
                     </div>
@@ -580,7 +580,7 @@ const DoctorDashboard = () => {
                   <Bell size={18} className="text-ayurveda-green-600" />
                   {t('allNotifications')}
                 </h2>
-                <span className="text-xs font-bold bg-slate-100 dark:bg-zinc-850 px-3 py-1 rounded-full text-slate-500">
+                <span className="text-xs font-bold bg-slate-100 dark:bg-zinc-800 px-3 py-1 rounded-full text-slate-500">
                   {notifications.filter(n => !n.isRead).length} Unread
                 </span>
               </div>
@@ -597,7 +597,7 @@ const DoctorDashboard = () => {
                     return (
                       <div
                         key={n._id}
-                        className={`p-4 rounded-2xl border flex justify-between items-start gap-4 transition-all duration-200 ${n.isRead ? 'bg-slate-50/50 dark:bg-zinc-950/20 border-slate-100 dark:border-zinc-850 text-slate-400' : 'bg-green-50/30 dark:bg-emerald-950/15 border-green-100/50 dark:border-emerald-900/35 text-slate-755 dark:text-zinc-200'}`}
+                        className={`p-4 rounded-2xl border flex justify-between items-start gap-4 transition-all duration-200 ${n.isRead ? 'bg-slate-50/50 dark:bg-zinc-950/20 border-slate-100 dark:border-zinc-800 text-slate-400' : 'bg-green-50/30 dark:bg-emerald-950/15 border-green-100/50 dark:border-emerald-900/35 text-slate-700 dark:text-zinc-200'}`}
                       >
                         <div className="space-y-1.5 text-left flex-1">
                           <p className="font-extrabold text-xs flex items-center gap-1.5">

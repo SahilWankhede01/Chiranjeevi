@@ -73,7 +73,7 @@ const Footer = () => {
         <div className="border-t border-slate-800 dark:border-zinc-900 mt-12 pt-8 text-center text-xs text-slate-500 dark:text-zinc-600 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">
             <p>© {new Date().getFullYear()} {t('clinicName')} {t('clinicSub')}. {t('allRightsReserved')}</p>
-            <p className="text-[11px] text-slate-450 dark:text-zinc-500 mt-1">Designed by Sahil Wankhade</p>
+            <p className="text-[11px] text-slate-400 dark:text-zinc-500 mt-1">Designed by Sahil Wankhade</p>
           </div>
           <div className="flex items-center gap-1.5 text-[10px]">
             <span>Developed with</span>

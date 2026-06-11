@@ -411,7 +411,7 @@ const Home = () => {
                 {/* FIX 2: Typography Hierarchy - H4 18px, semi-bold */}
                 <h4 className="font-semibold text-[18px] text-slate-800 dark:text-zinc-100 mb-1.5">{t('specialty1')}</h4>
                 {/* FIX 2: Typography Hierarchy - Body 16px, regular */}
-                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-550 leading-relaxed">Deep herbal basti heat treatments targeting joint lubrication.</p>
+                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-400 leading-relaxed">Deep herbal basti heat treatments targeting joint lubrication.</p>
               </article>
 
               {/* FIX 5: Semantic landmark - specialty card 2 changed to article */}
@@ -422,7 +422,7 @@ const Home = () => {
                 {/* FIX 2: Typography Hierarchy - H4 18px, semi-bold */}
                 <h4 className="font-semibold text-[18px] text-slate-800 dark:text-zinc-100 mb-1.5">{t('specialty2')}</h4>
                 {/* FIX 2: Typography Hierarchy - Body 16px, regular */}
-                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-550 leading-relaxed">Full detoxification using natural herbs to reset blood circulation.</p>
+                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-400 leading-relaxed">Full detoxification using natural herbs to reset blood circulation.</p>
               </article>
 
               {/* FIX 5: Semantic landmark - specialty card 3 changed to article */}
@@ -433,7 +433,7 @@ const Home = () => {
                 {/* FIX 2: Typography Hierarchy - H4 18px, semi-bold */}
                 <h4 className="font-semibold text-[18px] text-slate-800 dark:text-zinc-100 mb-1.5">Authentic Sastras</h4>
                 {/* FIX 2: Typography Hierarchy - Body 16px, regular */}
-                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-550 leading-relaxed">Blending scriptural insights with modern diagnostics.</p>
+                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-400 leading-relaxed">Blending scriptural insights with modern diagnostics.</p>
               </article>
 
               {/* FIX 5: Semantic landmark - specialty card 4 changed to article */}
@@ -444,7 +444,7 @@ const Home = () => {
                 {/* FIX 2: Typography Hierarchy - H4 18px, semi-bold */}
                 <h4 className="font-semibold text-[18px] text-slate-800 dark:text-zinc-100 mb-1.5">{t('specialty4')}</h4>
                 {/* FIX 2: Typography Hierarchy - Body 16px, regular */}
-                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-550 leading-relaxed">Empathetic care plans centered around patient recovery.</p>
+                <p className="text-[16px] font-normal text-slate-400 dark:text-zinc-400 leading-relaxed">Empathetic care plans centered around patient recovery.</p>
               </article>
             </div>
           </div>
@@ -604,7 +604,7 @@ const Home = () => {
             <div className="absolute -left-4 sm:-left-16 top-1/2 -translate-y-1/2 z-20">
               <button 
                 onClick={prevTesti}
-                className="w-12 h-12 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-350 hover:bg-slate-50 dark:hover:bg-zinc-800 hover:scale-105 active:scale-95 transition-all shadow-md flex items-center justify-center min-h-[48px] min-w-[48px]"
+                className="w-12 h-12 rounded-full border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 hover:bg-slate-50 dark:hover:bg-zinc-800 hover:scale-105 active:scale-95 transition-all shadow-md flex items-center justify-center min-h-[48px] min-w-[48px]"
                 title="Previous Testimonial"
               >
                 <ChevronLeft size={20} className="stroke-[2.5]" />
@@ -641,7 +641,7 @@ const Home = () => {
               </p>
 
               {/* Reviewer Details */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 border-t border-slate-100 dark:border-zinc-850 pt-6">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-4 border-t border-slate-100 dark:border-zinc-800 pt-6">
                 <div className="flex items-center gap-3.5">
                   <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-ayurveda-green-600 to-ayurveda-green-700 text-white flex items-center justify-center font-extrabold text-sm shadow-md">
                     {t(`testiName${activeTesti + 1}`).split(' ')[0][0]}{t(`testiName${activeTesti + 1}`).split(' ')[1][0]}
@@ -741,7 +741,7 @@ const Home = () => {
                 /* PROBLEM 1 FIX: Fully functional FAQ accordion with smooth animations and plus/minus icons */
                 <div
                   key={index}
-                  className="border border-slate-100 dark:border-zinc-850 rounded-[1.8rem] overflow-hidden bg-slate-50/20 dark:bg-zinc-900/10 hover:border-slate-200 dark:hover:border-zinc-800 duration-300 shadow-sm"
+                  className="border border-slate-100 dark:border-zinc-800 rounded-[1.8rem] overflow-hidden bg-slate-50/20 dark:bg-zinc-900/10 hover:border-slate-200 dark:hover:border-zinc-800 duration-300 shadow-sm"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
@@ -760,7 +760,7 @@ const Home = () => {
                   {/* PROBLEM 1 FIX: Smooth transition height animation using modern grid-template-rows transition */}
                   <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${openFaq === index ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
                     <div className="overflow-hidden">
-                      <div className="px-5.5 pb-5.5 pt-1.5 text-xs leading-relaxed text-slate-500 dark:text-zinc-400 border-t border-slate-100/50 dark:border-zinc-850 bg-white dark:bg-zinc-900/20">
+                      <div className="px-5.5 pb-5.5 pt-1.5 text-xs leading-relaxed text-slate-500 dark:text-zinc-400 border-t border-slate-100/50 dark:border-zinc-800 bg-white dark:bg-zinc-900/20">
                         {faq.a}
                       </div>
                     </div>
@@ -809,7 +809,7 @@ const Home = () => {
                       <MapPin size={18} className="stroke-[2.2]" />
                     </div>
                     <div>
-                      <span className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">{t('addressLabel')}</span>
+                      <span className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest">{t('addressLabel')}</span>
                       <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 leading-snug mt-0.5 block">{t('addressVal')}</span>
                     </div>
                   </a>
@@ -823,7 +823,7 @@ const Home = () => {
                       <Phone size={18} className="stroke-[2.2]" />
                     </div>
                     <div>
-                      <span className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">{t('phoneLabel')}</span>
+                      <span className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest">{t('phoneLabel')}</span>
                       <span className="text-xs font-extrabold text-slate-800 dark:text-zinc-200 mt-0.5 block">{t('phoneVal')}</span>
                     </div>
                   </a>
@@ -833,7 +833,7 @@ const Home = () => {
                       <Clock size={18} className="stroke-[2.2]" />
                     </div>
                     <div>
-                      <span className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest">{t('hoursLabel')}</span>
+                      <span className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest">{t('hoursLabel')}</span>
                       <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 leading-snug mt-0.5 block">{t('hoursVal')}</span>
                     </div>
                   </div>

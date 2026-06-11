@@ -328,7 +328,7 @@ const PatientDashboard = () => {
             {user?.avatar ? (
               <img src={user.avatar} alt={t('patientAvatarAlt')} className="w-11 h-11 rounded-full object-cover border-2 border-emerald-500" />
             ) : (
-              <div className="w-11 h-11 rounded-full bg-ayurveda-green-50 dark:bg-zinc-850 text-ayurveda-green-700 dark:text-zinc-200 flex items-center justify-center font-extrabold text-base">
+              <div className="w-11 h-11 rounded-full bg-ayurveda-green-50 dark:bg-zinc-800 text-ayurveda-green-700 dark:text-zinc-200 flex items-center justify-center font-extrabold text-base">
                 {user?.name[0]}
               </div>
             )}
@@ -338,7 +338,7 @@ const PatientDashboard = () => {
             </div>
           </div>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-850/80"></div>
+          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
 
           {/* Nav menu links */}
           <nav className="flex flex-col gap-2">
@@ -359,7 +359,7 @@ const PatientDashboard = () => {
             ))}
           </nav>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-850/80 mt-2"></div>
+          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80 mt-2"></div>
 
           {/* Quick Metrics */}
           <div className="space-y-3 p-3 bg-emerald-50/20 dark:bg-emerald-950/10 rounded-2xl border border-emerald-100/50 dark:border-emerald-900/10 text-xs font-bold">
@@ -398,7 +398,7 @@ const PatientDashboard = () => {
               ) : appointments.length === 0 ? (
                 <div className="text-center py-16 max-w-md mx-auto space-y-4">
                   <Calendar size={40} className="text-slate-300 dark:text-zinc-750 mx-auto" />
-                  <p className="font-extrabold text-slate-600 dark:text-zinc-350">{t('noBookings')}</p>
+                  <p className="font-extrabold text-slate-600 dark:text-zinc-400">{t('noBookings')}</p>
                   <button
                     onClick={() => setActiveTab('new-booking')}
                     className="bg-ayurveda-green-600 hover:bg-ayurveda-green-750 text-white font-bold text-xs uppercase tracking-wider px-6.5 py-3 rounded-xl shadow-lg"
@@ -424,7 +424,7 @@ const PatientDashboard = () => {
                           {getStatusBadge(a.status)}
                         </div>
 
-                        <div className="grid grid-cols-2 gap-3 border-y border-slate-100 dark:border-zinc-850/45 py-3">
+                        <div className="grid grid-cols-2 gap-3 border-y border-slate-100 dark:border-zinc-800/45 py-3">
                           <div className="flex items-center gap-2.5">
                             <Calendar size={14} className="text-slate-400" />
                             <div>
@@ -444,14 +444,14 @@ const PatientDashboard = () => {
                         <div className="space-y-3">
                           <div>
                             <span className="block text-[8px] text-slate-400 uppercase tracking-widest font-bold mb-1">Stated Symptoms</span>
-                            <p className="text-xs text-slate-600 dark:text-zinc-400 bg-slate-50 dark:bg-zinc-950/60 p-3 rounded-xl border border-slate-100/50 dark:border-zinc-850 font-semibold leading-relaxed">
+                            <p className="text-xs text-slate-600 dark:text-zinc-400 bg-slate-50 dark:bg-zinc-950/60 p-3 rounded-xl border border-slate-100/50 dark:border-zinc-800 font-semibold leading-relaxed">
                               {a.disease}
                             </p>
                           </div>
 
                           {/* Vertical Leaf Treatment Timeline */}
                           {a.status !== 'Rejected' && (
-                            <div className="p-3 bg-slate-50 dark:bg-zinc-950/50 rounded-2xl border border-slate-100 dark:border-zinc-850">
+                            <div className="p-3 bg-slate-50 dark:bg-zinc-950/50 rounded-2xl border border-slate-100 dark:border-zinc-800">
                               <span className="block text-[8px] text-slate-400 uppercase font-bold tracking-widest mb-3">Detox Stage</span>
                               
                               <div className="relative pl-6 space-y-4">
@@ -463,7 +463,7 @@ const PatientDashboard = () => {
                                     {['Approved', 'Completed'].includes(a.status) ? '✓' : '1'}
                                   </div>
                                   <div>
-                                    <h5 className="text-[10px] font-extrabold text-slate-700 dark:text-zinc-350">Purvakarma (Preparatory Stages)</h5>
+                                    <h5 className="text-[10px] font-extrabold text-slate-700 dark:text-zinc-400">Purvakarma (Preparatory Stages)</h5>
                                     <p className="text-[9px] text-slate-400 mt-0.5">Snehana (Oil massages) & Swedana (steam detoxification).</p>
                                   </div>
                                 </div>
@@ -544,7 +544,7 @@ const PatientDashboard = () => {
                 
                 {/* Full Name */}
                 <div>
-                  <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">Full Name</label>
+                  <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Full Name</label>
                   <input
                     type="text"
                     required
@@ -558,7 +558,7 @@ const PatientDashboard = () => {
                 {/* Age & Visual Gender pills selection */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">Age</label>
+                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Age</label>
                     <input
                       type="number"
                       required
@@ -571,14 +571,14 @@ const PatientDashboard = () => {
 
                   {/* Gender Chips */}
                   <div>
-                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">Gender</label>
+                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Gender</label>
                     <div className="flex gap-2">
                       {['Male', 'Female', 'Other'].map((gOpt) => (
                         <button
                           key={gOpt}
                           type="button"
                           onClick={() => setGender(gOpt)}
-                          className={`flex-1 py-3 px-3 rounded-xl border text-xs font-bold text-center transition-all ${gender === gOpt ? 'bg-ayurveda-green-600 border-ayurveda-green-600 text-white' : 'bg-transparent border-slate-200 dark:border-zinc-850 text-slate-500 dark:text-zinc-400'}`}
+                          className={`flex-1 py-3 px-3 rounded-xl border text-xs font-bold text-center transition-all ${gender === gOpt ? 'bg-ayurveda-green-600 border-ayurveda-green-600 text-white' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400'}`}
                         >
                           {gOpt}
                         </button>
@@ -603,7 +603,7 @@ const PatientDashboard = () => {
                 {/* Date & Time slots dropdown */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">Preferred Date</label>
+                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Preferred Date</label>
                     <input
                       type="date"
                       required
@@ -615,7 +615,7 @@ const PatientDashboard = () => {
                   </div>
 
                   <div>
-                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">Time Slot</label>
+                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Time Slot</label>
                     <select
                       required
                       value={preferredTime}
@@ -641,7 +641,7 @@ const PatientDashboard = () => {
 
                 {/* Disease */}
                 <div>
-                  <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">Symptoms / Health Issue</label>
+                  <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Symptoms / Health Issue</label>
                   <textarea
                     required
                     rows="4"
@@ -701,7 +701,7 @@ const PatientDashboard = () => {
                     <span>Question {quizStep} of 5</span>
                     <span>{Math.round(((quizStep - 1) / 5) * 100)}% Completed</span>
                   </div>
-                  <div className="w-full bg-slate-100 dark:bg-zinc-850 h-1.5 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-100 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden">
                     <div className="bg-ayurveda-green-600 h-full transition-all" style={{ width: `${(quizStep / 5) * 100}%` }}></div>
                   </div>
 
@@ -714,9 +714,9 @@ const PatientDashboard = () => {
                         <button
                           key={oIdx}
                           onClick={() => handleQuizAnswer(`q${quizStep}`, opt.value)}
-                          className="w-full text-left p-4.5 rounded-2xl border border-slate-150 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-950 flex items-center justify-between group transition-all"
+                          className="w-full text-left p-4.5 rounded-2xl border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-950 flex items-center justify-between group transition-all"
                         >
-                          <span className="text-xs font-semibold text-slate-700 dark:text-zinc-350">{opt.label}</span>
+                          <span className="text-xs font-semibold text-slate-700 dark:text-zinc-400">{opt.label}</span>
                           <ChevronRight size={14} className="text-slate-300 group-hover:text-slate-500 translate-x-0 group-hover:translate-x-1 duration-300" />
                         </button>
                       ))}
@@ -735,7 +735,7 @@ const PatientDashboard = () => {
                   </div>
 
                   {/* Level dial stats */}
-                  <div className="space-y-4 bg-slate-50/50 dark:bg-zinc-950/30 p-6 rounded-[2rem] border border-slate-100 dark:border-zinc-850">
+                  <div className="space-y-4 bg-slate-50/50 dark:bg-zinc-950/30 p-6 rounded-[2rem] border border-slate-100 dark:border-zinc-800">
                     
                     {/* Vata */}
                     <div className="space-y-1.5 text-xs font-bold text-slate-700 dark:text-zinc-300">
@@ -743,7 +743,7 @@ const PatientDashboard = () => {
                         <span>🍃 Vata (Air/Space)</span>
                         <span>{quizResult.vata}%</span>
                       </div>
-                      <div className="w-full bg-slate-200/50 dark:bg-zinc-850 h-3 rounded-full overflow-hidden">
+                      <div className="w-full bg-slate-200/50 dark:bg-zinc-800 h-3 rounded-full overflow-hidden">
                         <div className="bg-sky-500 h-full rounded-full transition-all" style={{ width: `${quizResult.vata}%` }}></div>
                       </div>
                     </div>
@@ -754,7 +754,7 @@ const PatientDashboard = () => {
                         <span>🔥 Pitta (Fire/Water)</span>
                         <span>{quizResult.pitta}%</span>
                       </div>
-                      <div className="w-full bg-slate-200/50 dark:bg-zinc-850 h-3 rounded-full overflow-hidden">
+                      <div className="w-full bg-slate-200/50 dark:bg-zinc-800 h-3 rounded-full overflow-hidden">
                         <div className="bg-amber-500 h-full rounded-full transition-all" style={{ width: `${quizResult.pitta}%` }}></div>
                       </div>
                     </div>
@@ -765,7 +765,7 @@ const PatientDashboard = () => {
                         <span>🌱 Kapha (Earth/Water)</span>
                         <span>{quizResult.kapha}%</span>
                       </div>
-                      <div className="w-full bg-slate-200/50 dark:bg-zinc-850 h-3 rounded-full overflow-hidden">
+                      <div className="w-full bg-slate-200/50 dark:bg-zinc-800 h-3 rounded-full overflow-hidden">
                         <div className="bg-emerald-500 h-full rounded-full transition-all" style={{ width: `${quizResult.kapha}%` }}></div>
                       </div>
                     </div>
@@ -819,12 +819,12 @@ const PatientDashboard = () => {
                 <h2 className="text-xl font-serif font-extrabold text-slate-800 dark:text-zinc-150">Manage Profile Details</h2>
               </div>
 
-              <div className="flex items-center gap-6 border-b border-slate-100 dark:border-zinc-850 pb-6">
+              <div className="flex items-center gap-6 border-b border-slate-100 dark:border-zinc-800 pb-6">
                 <div className="relative">
                   {user?.avatar ? (
                     <img src={user.avatar} alt={t('patientAvatarAlt')} className="w-20 h-20 rounded-full object-cover border-2 border-slate-200 dark:border-zinc-800" />
                   ) : (
-                    <div className="w-20 h-20 rounded-full bg-ayurveda-green-50 dark:bg-zinc-800 text-ayurveda-green-700 dark:text-zinc-350 flex items-center justify-center font-extrabold text-2xl">
+                    <div className="w-20 h-20 rounded-full bg-ayurveda-green-50 dark:bg-zinc-800 text-ayurveda-green-700 dark:text-zinc-400 flex items-center justify-center font-extrabold text-2xl">
                       {user?.name[0]}
                     </div>
                   )}
@@ -849,7 +849,7 @@ const PatientDashboard = () => {
 
               <form onSubmit={handleProfileSubmit} className="space-y-4">
                 <div className="text-left">
-                  <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">{t('fullName')}</label>
+                  <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">{t('fullName')}</label>
                   <input
                     type="text"
                     required
@@ -874,7 +874,7 @@ const PatientDashboard = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-left">
-                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">{t('age')}</label>
+                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">{t('age')}</label>
                     <input
                       type="number"
                       required
@@ -886,7 +886,7 @@ const PatientDashboard = () => {
                   </div>
 
                   <div className="text-left">
-                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-550 uppercase tracking-widest mb-1.5">{t('gender')}</label>
+                    <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">{t('gender')}</label>
                     <select
                       required
                       value={profGender}
