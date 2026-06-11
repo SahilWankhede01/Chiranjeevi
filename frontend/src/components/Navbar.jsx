@@ -208,7 +208,9 @@ const Navbar = () => {
               /* FIX 5: Tap target size - px-6 py-3.5 min-h-[48px] ensures >48px tap height & width */
               className="bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 hover:from-ayurveda-green-700 hover:to-ayurveda-green-800 text-white font-bold text-[10px] xl:text-[11px] px-4 py-2.5 xl:px-6 xl:py-3.5 rounded-full shadow-lg shadow-emerald-700/10 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-widest min-h-[40px] xl:min-h-[48px] flex items-center justify-center"
             >
-              {t('bookNow')}
+              {user && user.role === 'doctor'
+                ? (language === 'mr' ? 'अपॉइंटमेंट्स पहा' : language === 'hi' ? 'अपॉइंटमेंट देखें' : 'See Appointments')
+                : t('bookNow')}
             </Link>
           </div>
 
@@ -430,7 +432,9 @@ const Navbar = () => {
               to={getDashboardPath()}
               className="bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold text-[10px] uppercase tracking-wider px-3.5 py-2 rounded-full shadow-md shadow-emerald-700/15 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center min-h-[48px]"
             >
-              {language === 'mr' ? 'वेळ घ्या' : language === 'hi' ? 'समय लें' : 'Book'}
+              {user && user.role === 'doctor'
+                ? (language === 'mr' ? 'पहा' : language === 'hi' ? 'देखें' : 'See')
+                : (language === 'mr' ? 'वेळ घ्या' : language === 'hi' ? 'समय लें' : 'Book')}
             </Link>
 
             <button
