@@ -321,10 +321,10 @@ const PatientDashboard = () => {
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         
-        {/* DESKTOP SIDEBAR CONTAINER LAYOUT */}
-        <aside className="w-full lg:w-72 glass-panel p-6 rounded-[2.2rem] shadow-xl flex flex-col gap-6 text-left no-print">
-          {/* User profile capsule card */}
-          <div className="flex items-center gap-3.5 bg-slate-50/50 dark:bg-zinc-900/40 p-3.5 rounded-2xl border border-slate-100 dark:border-zinc-800">
+        {/* RESPONSIVE SIDEBAR/NAVBAR CONTAINER LAYOUT */}
+        <aside className="w-full lg:w-72 glass-panel p-4 lg:p-6 rounded-[1.8rem] lg:rounded-[2.2rem] shadow-xl flex flex-col lg:flex-col gap-4 lg:gap-6 text-left no-print">
+          {/* User profile capsule card - Hidden on mobile/tablet to save space */}
+          <div className="hidden lg:flex items-center gap-3.5 bg-slate-50/50 dark:bg-zinc-900/40 p-3.5 rounded-2xl border border-slate-105 dark:border-zinc-800">
             {user?.avatar ? (
               <img src={user.avatar} alt={t('patientAvatarAlt')} className="w-11 h-11 rounded-full object-cover border-2 border-emerald-500" />
             ) : (
@@ -338,10 +338,10 @@ const PatientDashboard = () => {
             </div>
           </div>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
+          <div className="hidden lg:block h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
 
-          {/* Nav menu links */}
-          <nav className="flex flex-col gap-2">
+          {/* Nav menu links: horizontal scrollable on <lg, vertical on >=lg */}
+          <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible scrollbar-none py-1 lg:py-0 w-full">
             {[
               { id: 'bookings', label: 'Sessions History', icon: <History size={15} /> },
               { id: 'new-booking', label: 'Book Consultation', icon: <FilePlus size={15} /> },
@@ -351,7 +351,11 @@ const PatientDashboard = () => {
               <button
                 key={menuItem.id}
                 onClick={() => setActiveTab(menuItem.id)}
-                className={`w-full flex items-center gap-3.5 px-4.5 py-3.5 rounded-2xl text-xs font-bold text-left transition-all ${activeTab === menuItem.id ? 'bg-[#1b9d67] text-white shadow-lg shadow-emerald-700/10' : 'text-slate-500 hover:bg-slate-50/50 dark:text-zinc-400 dark:hover:bg-zinc-900/60'}`}
+                className={`flex items-center gap-2 lg:gap-3.5 px-4.5 py-3 rounded-xl lg:rounded-2xl text-xs font-bold text-left transition-all whitespace-nowrap min-h-[44px] lg:min-h-[48px] shrink-0 ${
+                  activeTab === menuItem.id 
+                    ? 'bg-ayurveda-green-500 text-white shadow-lg shadow-emerald-700/10' 
+                    : 'text-slate-500 hover:bg-slate-50/50 dark:text-zinc-400 dark:hover:bg-zinc-900/60 bg-slate-50/50 dark:bg-zinc-900/35 lg:bg-transparent lg:dark:bg-transparent border border-slate-100 dark:border-zinc-800/40 lg:border-none'
+                }`}
               >
                 {menuItem.icon}
                 <span>{menuItem.label}</span>
@@ -359,10 +363,10 @@ const PatientDashboard = () => {
             ))}
           </nav>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80 mt-2"></div>
+          <div className="hidden lg:block h-[1px] bg-slate-100 dark:bg-zinc-800/80 mt-2"></div>
 
-          {/* Quick Metrics */}
-          <div className="space-y-3 p-3 bg-emerald-50/20 dark:bg-emerald-950/10 rounded-2xl border border-emerald-100/50 dark:border-emerald-900/10 text-xs font-bold">
+          {/* Quick Metrics - Hidden on mobile/tablet */}
+          <div className="hidden lg:block space-y-3 p-3 bg-emerald-50/20 dark:bg-emerald-950/10 rounded-2xl border border-emerald-100/50 dark:border-emerald-900/10 text-xs font-bold">
             <span className="text-[9px] uppercase tracking-wider text-slate-400">Portal Activity</span>
             <div className="flex justify-between">
               <span className="text-slate-500 font-semibold">Sessions Total</span>
@@ -541,8 +545,7 @@ const PatientDashboard = () => {
               </div>
 
               <form onSubmit={handleBookingSubmit} className="space-y-5">
-                
-                {/* Full Name */}
+                             {/* Full Name */}
                 <div>
                   <label className="block text-[9px] font-extrabold text-slate-400 dark:text-zinc-400 uppercase tracking-widest mb-1.5">Full Name</label>
                   <input
@@ -551,7 +554,7 @@ const PatientDashboard = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Full Name"
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                    className="w-full h-[48px] px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
                   />
                 </div>
 
@@ -565,7 +568,7 @@ const PatientDashboard = () => {
                       value={age}
                       onChange={(e) => setAge(e.target.value)}
                       placeholder="30"
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                      className="w-full h-[48px] px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
                     />
                   </div>
 
@@ -578,7 +581,7 @@ const PatientDashboard = () => {
                           key={gOpt}
                           type="button"
                           onClick={() => setGender(gOpt)}
-                          className={`flex-1 py-3 px-3 rounded-xl border text-xs font-bold text-center transition-all ${gender === gOpt ? 'bg-ayurveda-green-600 border-ayurveda-green-600 text-white' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400'}`}
+                          className={`flex-1 h-[48px] flex items-center justify-center px-3 rounded-xl border text-xs font-bold text-center transition-all ${gender === gOpt ? 'bg-ayurveda-green-600 border-ayurveda-green-600 text-white' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-500 dark:text-zinc-400'}`}
                         >
                           {gOpt}
                         </button>
@@ -596,7 +599,7 @@ const PatientDashboard = () => {
                     value={mobileNumber}
                     onChange={(e) => setMobileNumber(e.target.value)}
                     placeholder="Mobile number"
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                    className="w-full h-[48px] px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
                   />
                 </div>
 
@@ -610,7 +613,7 @@ const PatientDashboard = () => {
                       min={new Date().toISOString().split('T')[0]}
                       value={preferredDate}
                       onChange={(e) => setPreferredDate(e.target.value)}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold text-slate-500"
+                      className="w-full h-[48px] px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold text-slate-550"
                     />
                   </div>
 
@@ -620,7 +623,7 @@ const PatientDashboard = () => {
                       required
                       value={preferredTime}
                       onChange={(e) => setPreferredTime(e.target.value)}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-300 transition-all font-semibold"
+                      className="w-full h-[48px] px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-300 transition-all font-semibold"
                     >
                       <option value="">Select Time</option>
                       <optgroup label="Morning (10:00 AM - 02:00 PM)">
@@ -655,7 +658,7 @@ const PatientDashboard = () => {
                 <button
                   type="submit"
                   disabled={bookingLoading}
-                  className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold py-3.5 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-300 uppercase text-xs tracking-widest flex items-center justify-center gap-2.5"
+                  className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold min-h-[48px] py-3 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 duration-300 uppercase text-xs tracking-widest flex items-center justify-center gap-2.5"
                 >
                   {bookingLoading ? (
                     <>

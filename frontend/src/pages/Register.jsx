@@ -104,10 +104,10 @@ const Register = () => {
       </div>
 
       {/* CARD CONSOLE (Right Side form) */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 relative overflow-y-auto max-h-[85vh]">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-12 relative overflow-y-auto max-h-[85vh]">
         <div className="absolute top-10 right-10 w-72 h-72 glow-orb-saffron -z-10 opacity-30"></div>
         
-        <div className="max-w-md w-full space-y-8 glass-card-premium p-8 sm:p-10 rounded-[2.5rem] shadow-2xl relative z-10 text-left">
+        <div className="max-w-md w-full space-y-8 glass-card-premium p-6 sm:p-10 rounded-[2.5rem] shadow-2xl relative z-10 text-left">
           
           <div className="text-center">
             <div className="mx-auto h-14 w-14 rounded-2xl bg-gradient-to-tr from-ayurveda-green-600 to-ayurveda-green-700 flex items-center justify-center text-white shadow-lg float-animation">
@@ -136,7 +136,7 @@ const Register = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                  className="w-full pl-11 pr-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold h-[48px]"
                 />
               </div>
             </div>
@@ -154,7 +154,7 @@ const Register = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="john@example.com"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                  className="w-full pl-11 pr-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold h-[48px]"
                 />
               </div>
             </div>
@@ -172,7 +172,7 @@ const Register = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="•••••• (Min. 6 chars)"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                  className="w-full pl-11 pr-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold h-[48px]"
                 />
               </div>
             </div>
@@ -190,7 +190,7 @@ const Register = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="9145331731"
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                  className="w-full pl-11 pr-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold h-[48px]"
                 />
               </div>
             </div>
@@ -201,7 +201,7 @@ const Register = () => {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
-                className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-150 transition-all font-semibold"
+                className="w-full px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-150 transition-all font-semibold h-[48px]"
               >
                 <option value="patient">Patient / Customer</option>
                 <option value="doctor">Doctor Admin (Authorized email)</option>
@@ -218,7 +218,7 @@ const Register = () => {
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
                   placeholder="30"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                  className="w-full px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold h-[48px]"
                 />
               </div>
               <div>
@@ -227,7 +227,7 @@ const Register = () => {
                   required
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-300 transition-all font-semibold"
+                  className="w-full px-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-300 transition-all font-semibold h-[48px]"
                 >
                   <option value="">{t('selectGender')}</option>
                   <option value="Male">{t('male')}</option>
@@ -240,7 +240,7 @@ const Register = () => {
             <button
               type="submit"
               disabled={loadingState}
-              className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold py-3.5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase text-xs tracking-widest mt-6 flex items-center justify-center gap-2.5"
+              className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold min-h-[48px] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase text-xs tracking-widest mt-6 flex items-center justify-center gap-2.5"
             >
               {loadingState ? (
                 <>

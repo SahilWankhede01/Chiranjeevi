@@ -240,8 +240,8 @@ const Home = () => {
                 <span>{language === 'en' ? 'AYURVEDIC WELLNESS' : t('heroTag')}</span>
               </div>
               
-              {/* FIX 2: Typography Hierarchy - H1 32px, bold */}
-              <h1 className="text-[32px] font-bold font-serif text-slate-800 dark:text-zinc-50 leading-tight tracking-tight">
+              {/* FIX 2: Typography Hierarchy - H1 responsive sizes */}
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-slate-800 dark:text-zinc-50 leading-tight tracking-tight">
                 {language === 'en' ? (
                   <>
                     Restore Your <span className="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent italic font-semibold dark:from-emerald-400 dark:to-teal-300">Natural Balance</span> & Inner Health
@@ -258,16 +258,16 @@ const Home = () => {
               </h1>
               
               {/* FIX 2: Typography Hierarchy - Body 16px, regular */}
-              <p className="text-[16px] font-normal text-slate-500 dark:text-zinc-400 leading-relaxed font-medium">
+              <p className="text-sm sm:text-base font-normal text-slate-500 dark:text-zinc-400 leading-relaxed font-medium">
                 {t('heroDesc')}
               </p>
               
               {/* Call to Actions */}
-              <div className="flex flex-wrap items-center gap-4 mt-6">
+              <div className="flex flex-col xs:flex-row items-center gap-4 mt-6 w-full">
                 {/* Book Appointment CTA */}
                 <Link
                   to="/patient-dashboard"
-                  className="btn-premium-base appointment-pulse bg-gradient-to-r from-[#2c5e2e] to-[#1b3b1c] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-emerald-800/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] min-w-[220px] whitespace-nowrap border border-emerald-700/20"
+                  className="btn-premium-base appointment-pulse bg-gradient-to-r from-[#2c5e2e] to-[#1b3b1c] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-emerald-800/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full xs:w-auto min-w-0 xs:min-w-[220px] whitespace-nowrap border border-emerald-700/20"
                 >
                   <span>{t('heroCTA1')}</span>
                   <ArrowRight size={14} className="stroke-[2.5]" />
@@ -277,7 +277,7 @@ const Home = () => {
                   href="https://wa.me/919145331731"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-premium-base whatsapp-pulse bg-gradient-to-r from-[#20ba59] to-[#25D366] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-green-500/35 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] min-w-[220px] whitespace-nowrap border border-green-500/20"
+                  className="btn-premium-base whatsapp-pulse bg-gradient-to-r from-[#20ba59] to-[#25D366] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-green-500/35 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full xs:w-auto min-w-0 xs:min-w-[220px] whitespace-nowrap border border-green-500/20"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.731-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.864.001-2.637-1.03-5.114-2.905-6.989-1.874-1.875-4.352-2.907-6.99-2.908-5.442 0-9.869 4.42-9.873 9.863-.001 1.79.47 3.537 1.366 5.09L1.933 22.007l6.196-1.625c1.472.802 2.871 1.202 4.518 1.202zm11.233-7.618c-.3-.15-1.771-.875-2.071-.985-.3-.11-.52-.16-.74.16-.22.32-.85 1.075-1.04 1.29-.19.22-.38.25-.68.1-.3-.15-1.265-.467-2.41-1.485-.89-.79-1.49-1.77-1.66-2.07-.19-.3-.02-.47.13-.62.14-.13.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.74-1.785-1.01-2.435-.26-.63-.53-.54-.74-.55-.19-.01-.41-.01-.63-.01-.22 0-.58.08-.88.41-.3.33-1.15 1.13-1.15 2.75 0 1.62 1.18 3.19 1.34 3.4 1.57 2.19 3.01 3.22 4.41 3.72.63.22 1.12.27 1.54.2.47-.07 1.45-.59 1.65-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.15-.52-.3z"/>
@@ -287,21 +287,21 @@ const Home = () => {
               </div>
 
               {/* Glass Trust Metrics Card */}
-              <div className="grid grid-cols-3 gap-4 border border-slate-200/50 dark:border-zinc-800/80 bg-white/40 dark:bg-zinc-900/10 backdrop-blur-md p-5.5 rounded-3xl mt-6 shadow-md shadow-slate-100/5 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 border border-slate-200/50 dark:border-zinc-800/80 bg-white/40 dark:bg-zinc-900/10 backdrop-blur-md p-3 sm:p-5.5 rounded-3xl mt-6 shadow-md shadow-slate-100/5 animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 <div className="text-center">
                   {/* FIX 2: Typography Hierarchy - Important numbers 20px, semi-bold with accent color */}
-                  <span className="block text-[20px] font-semibold text-ayurveda-green-700 dark:text-ayurveda-green-400">5+</span>
-                  <span className="text-[9px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-zinc-500 mt-1.5 block">{t('yearsExp')}</span>
+                  <span className="block text-base sm:text-[20px] font-semibold text-ayurveda-green-700 dark:text-ayurveda-green-400">5+</span>
+                  <span className="text-[8px] sm:text-[9px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-zinc-500 mt-1 sm:mt-1.5 block">{t('yearsExp')}</span>
                 </div>
                 <div className="text-center border-x border-slate-200/40 dark:border-zinc-800/65">
                   {/* FIX 2: Typography Hierarchy - Important numbers 20px, semi-bold with accent color */}
-                  <span className="block text-[20px] font-semibold text-ayurveda-green-700 dark:text-ayurveda-green-400">5k+</span>
-                  <span className="text-[9px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-zinc-500 mt-1.5 block">{t('satisfiedPatients')}</span>
+                  <span className="block text-base sm:text-[20px] font-semibold text-ayurveda-green-700 dark:text-ayurveda-green-400">5k+</span>
+                  <span className="text-[8px] sm:text-[9px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-zinc-500 mt-1 sm:mt-1.5 block">{t('satisfiedPatients')}</span>
                 </div>
                 <div className="text-center">
                   {/* FIX 2: Typography Hierarchy - Important numbers 20px, semi-bold with accent color */}
-                  <span className="block text-[20px] font-semibold text-ayurveda-green-700 dark:text-ayurveda-green-400">98%</span>
-                  <span className="text-[9px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-zinc-500 mt-1.5 block">{t('successRate')}</span>
+                  <span className="block text-base sm:text-[20px] font-semibold text-ayurveda-green-700 dark:text-ayurveda-green-400">98%</span>
+                  <span className="text-[8px] sm:text-[9px] font-extrabold tracking-wider uppercase text-slate-400 dark:text-zinc-500 mt-1 sm:mt-1.5 block">{t('successRate')}</span>
                 </div>
               </div>
 
@@ -329,22 +329,22 @@ const Home = () => {
                 </div>
 
                 {/* Upper Floating Badge */}
-                <div className="absolute -top-5 -right-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white p-3.5 px-5 rounded-[1.8rem] shadow-2xl z-20 hover:scale-105 transition-all select-none border border-amber-400/20">
-                  <div className="flex items-center gap-2">
+                <div className="absolute -top-5 -right-2 sm:-right-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white p-3 py-2.5 sm:p-3.5 sm:px-5 rounded-[1.8rem] shadow-2xl z-20 hover:scale-105 transition-all select-none border border-amber-400/20">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
                     <Sparkles size={13} className="animate-spin text-amber-200" style={{ animationDuration: '6s' }} />
                     <div className="text-left leading-none">
                       <span className="block text-[8px] font-extrabold tracking-widest uppercase text-amber-100 mb-0.5">{language === 'mr' ? 'तज्ञ वैद्य' : language === 'hi' ? 'विशेषज्ञ चिकित्सक' : 'Expert Physician'}</span>
-                      <span className="block text-xs font-extrabold">{t('doctorDegrees')}</span>
+                      <span className="block text-[10px] sm:text-xs font-extrabold">{t('doctorDegrees')}</span>
                     </div>
                   </div>
                 </div>
                 
                 {/* Floating stats card */}
                 {/* FIX 1: Subtle card scale transform + shadow on hover (hover-card-feedback) */}
-                <div className="absolute -bottom-6 -left-6 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-slate-100 dark:border-zinc-800 p-5 px-7 rounded-[2rem] shadow-2xl z-20 hover-card-feedback select-none">
+                <div className="absolute -bottom-4 -left-2 sm:-bottom-6 sm:-left-6 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-slate-100 dark:border-zinc-800 p-4 px-5 sm:p-5 sm:px-7 rounded-[2rem] shadow-2xl z-20 hover-card-feedback select-none">
                   {/* FIX 2: Typography Hierarchy - Important numbers 20px, semi-bold with accent color */}
-                  <span className="block text-[20px] font-semibold text-[#1c452d] dark:text-[#46ca96] leading-none">5,000+</span>
-                  <span className="text-[9px] text-slate-400 dark:text-zinc-500 font-extrabold tracking-wider uppercase mt-1.5 block">
+                  <span className="block text-base sm:text-[20px] font-semibold text-[#1c452d] dark:text-[#46ca96] leading-none">5,000+</span>
+                  <span className="text-[8px] sm:text-[9px] text-slate-400 dark:text-zinc-500 font-extrabold tracking-wider uppercase mt-1.5 block">
                     {language === 'mr' ? 'रुग्ण बरे झाले' : language === 'hi' ? 'मरीज ठीक हुए' : 'Patients Healed'}
                   </span>
                 </div>

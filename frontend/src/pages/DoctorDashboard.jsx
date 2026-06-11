@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
 import { useAuth } from '../context/AuthContext';
+import MobileTable from '../components/MobileTable';
 import {
   Users,
   Calendar,
@@ -234,11 +235,11 @@ const DoctorDashboard = () => {
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         
-        {/* DOCTOR SIDEBAR LAYOUT */}
-        <aside className="w-full lg:w-72 glass-panel p-6 rounded-[2.2rem] shadow-xl flex flex-col gap-6 text-left no-print">
+        {/* RESPONSIVE DOCTOR SIDEBAR LAYOUT */}
+        <aside className="w-full lg:w-72 glass-panel p-4 lg:p-6 rounded-[1.8rem] lg:rounded-[2.2rem] shadow-xl flex flex-col lg:flex-col gap-4 lg:gap-6 text-left no-print">
           
-          {/* Doctor Info Capsule */}
-          <div className="flex items-center gap-3.5 bg-slate-50/50 dark:bg-zinc-900/40 p-3.5 rounded-2xl border border-slate-100 dark:border-zinc-800">
+          {/* Doctor Info Capsule - Hidden on mobile/tablet to save space */}
+          <div className="hidden lg:flex items-center gap-3.5 bg-slate-50/50 dark:bg-zinc-900/40 p-3.5 rounded-2xl border border-slate-100 dark:border-zinc-800">
             <div className="w-11 h-11 rounded-full bg-emerald-50 dark:bg-zinc-800 text-ayurveda-green-700 dark:text-zinc-200 flex items-center justify-center font-extrabold text-base border-2 border-emerald-500">
               DG
             </div>
@@ -248,10 +249,10 @@ const DoctorDashboard = () => {
             </div>
           </div>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
+          <div className="hidden lg:block h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
 
-          {/* Nav Links */}
-          <nav className="flex flex-col gap-2">
+          {/* Nav Links: horizontal scrollable on <lg, vertical on >=lg */}
+          <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible scrollbar-none py-1 lg:py-0 w-full">
             {[
               { id: 'bookings', label: 'Dashboard Queue', icon: <LayoutDashboard size={15} /> },
               { id: 'calendar', label: 'Interactive Scheduler', icon: <Calendar size={15} /> },
@@ -260,7 +261,11 @@ const DoctorDashboard = () => {
               <button
                 key={menuItem.id}
                 onClick={() => setActiveSubTab(menuItem.id)}
-                className={`w-full flex items-center gap-3.5 px-4.5 py-3.5 rounded-2xl text-xs font-bold text-left transition-all ${activeSubTab === menuItem.id ? 'bg-[#1b9d67] text-white shadow-lg shadow-emerald-700/10' : 'text-slate-500 hover:bg-slate-50/50 dark:text-zinc-400 dark:hover:bg-zinc-900/60'}`}
+                className={`flex items-center gap-2 lg:gap-3.5 px-4.5 py-3 rounded-xl lg:rounded-2xl text-xs font-bold text-left transition-all whitespace-nowrap min-h-[44px] lg:min-h-[48px] shrink-0 ${
+                  activeSubTab === menuItem.id 
+                    ? 'bg-ayurveda-green-500 text-white shadow-lg shadow-emerald-700/10' 
+                    : 'text-slate-500 hover:bg-slate-50/50 dark:text-zinc-400 dark:hover:bg-zinc-900/60 bg-slate-50/50 dark:bg-zinc-900/35 lg:bg-transparent lg:dark:bg-transparent border border-slate-100 dark:border-zinc-800/40 lg:border-none'
+                }`}
               >
                 {menuItem.icon}
                 <span>{menuItem.label}</span>
@@ -268,11 +273,11 @@ const DoctorDashboard = () => {
             ))}
           </nav>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80 mt-2"></div>
+          <div className="hidden lg:block h-[1px] bg-slate-100 dark:bg-zinc-800/80 mt-2"></div>
 
-          {/* Quick Stats list */}
+          {/* Quick Stats list - Hidden on mobile/tablet */}
           {analytics && (
-            <div className="space-y-3 p-3 bg-emerald-50/20 dark:bg-emerald-950/10 rounded-2xl border border-emerald-100/50 dark:border-emerald-900/10 text-xs font-bold">
+            <div className="hidden lg:block space-y-3 p-3 bg-emerald-50/20 dark:bg-emerald-950/10 rounded-2xl border border-emerald-100/50 dark:border-emerald-900/10 text-xs font-bold">
               <span className="text-[9px] uppercase tracking-wider text-slate-400">Status Metrics</span>
               <div className="flex justify-between">
                 <span className="text-slate-500 font-semibold">Total Booked</span>
@@ -305,27 +310,27 @@ const DoctorDashboard = () => {
               </div>
 
               {/* Filters */}
-              <div className="bg-white dark:bg-zinc-900/50 p-4.5 rounded-2xl border border-slate-100 dark:border-zinc-800/80 shadow-sm flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
-                <form onSubmit={handleSearchSubmit} className="flex-1 max-w-sm flex items-center relative">
+              <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-2xl border border-slate-105 dark:border-zinc-800/80 shadow-sm flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
+                <form onSubmit={handleSearchSubmit} className="w-full md:max-w-xs flex items-center relative">
                   <input
                     type="text"
                     placeholder="Search Patient Name..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:outline-none focus:ring-2 focus:ring-ayurveda-green-500 dark:text-zinc-200"
+                    className="w-full pl-9 pr-4 py-3 md:py-2 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:outline-none focus:ring-2 focus:ring-ayurveda-green-500 dark:text-zinc-200 min-h-[44px] md:min-h-0"
                   />
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
                     <Search size={14} />
                   </span>
                 </form>
 
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bold">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] text-slate-400 uppercase tracking-wider">Status:</span>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 text-xs font-bold w-full md:w-auto">
+                  <div className="flex flex-1 sm:flex-initial items-center gap-2">
+                    <span className="text-[9px] text-slate-400 uppercase tracking-wider whitespace-nowrap">Status:</span>
                     <select
                       value={statusFilter}
                       onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-                      className="px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:outline-none dark:text-zinc-300"
+                      className="w-full sm:w-auto px-3 py-2.5 md:py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:outline-none dark:text-zinc-300 min-h-[44px] md:min-h-0"
                     >
                       <option value="All">All Statuses</option>
                       <option value="Pending">Pending</option>
@@ -335,23 +340,24 @@ const DoctorDashboard = () => {
                     </select>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <span className="text-[9px] text-slate-400 uppercase tracking-wider">Date:</span>
+                  <div className="flex flex-1 sm:flex-initial items-center gap-2">
+                    <span className="text-[9px] text-slate-400 uppercase tracking-wider whitespace-nowrap">Date:</span>
                     <input
                       type="date"
                       value={dateFilter}
                       onChange={(e) => { setDateFilter(e.target.value); setPage(1); }}
-                      className="px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs text-slate-500 focus:outline-none focus:ring-2 focus:ring-ayurveda-green-500"
+                      className="w-full sm:w-auto px-3 py-2.5 md:py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs text-slate-500 focus:outline-none focus:ring-2 focus:ring-ayurveda-green-500 min-h-[44px] md:min-h-0"
                     />
                   </div>
 
                   {(search || dateFilter || statusFilter !== 'All') && (
-                    <button onClick={clearFilters} className="text-xs text-red-500 hover:underline">Clear</button>
+                    <button onClick={clearFilters} className="text-xs text-red-500 hover:underline min-h-[44px] sm:min-h-0 px-2">Clear</button>
                   )}
                 </div>
               </div>
 
               {/* Table */}
+              {/* Mobile Table */}
               <div className="bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800/80 rounded-2xl shadow-sm overflow-hidden">
                 {loading ? (
                   <div className="flex justify-center items-center py-20">
@@ -363,103 +369,188 @@ const DoctorDashboard = () => {
                     <p className="font-extrabold text-slate-550 dark:text-zinc-400">No appointments found matching filters.</p>
                   </div>
                 ) : (
-                  <div className="overflow-x-auto text-left">
-                    <table className="min-w-full divide-y divide-slate-100 dark:divide-zinc-800">
-                      <thead className="bg-slate-50/50 dark:bg-zinc-950/20">
-                        <tr>
-                          <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Patient</th>
-                          <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Schedule</th>
-                          <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Symptoms</th>
-                          <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Status</th>
-                          <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider">Remarks / Advice</th>
-                          <th className="px-5 py-4 text-[9px] font-extrabold text-slate-400 uppercase tracking-wider text-right">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100 dark:divide-zinc-800 text-xs text-slate-700 dark:text-zinc-400">
-                        {appointments.map((a) => (
-                          <tr key={a._id} className="hover:bg-slate-50/30 dark:hover:bg-zinc-800/20 transition-all">
-                            
-                            <td className="px-5 py-4 whitespace-nowrap">
-                              <div className="flex items-center gap-3.5">
-                                {a.patient?.avatar ? (
-                                  <img src={a.patient.avatar} alt={t('patientAvatarAlt')} className="w-8.5 h-8.5 rounded-full object-cover border border-slate-200 dark:border-zinc-800" />
-                                ) : (
-                                  <div className="w-8.5 h-8.5 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-slate-500">
-                                    <User size={13} />
-                                  </div>
+                  <MobileTable
+                    headers={[
+                      'Patient',
+                      'Schedule',
+                      'Symptoms',
+                      'Status',
+                      'Remarks / Advice',
+                      { label: 'Actions', align: 'right' }
+                    ]}
+                    data={appointments}
+                    renderMobileCard={(a) => (
+                      <div className="space-y-3 text-left">
+                        {/* Card Header: Patient details */}
+                        <div className="flex items-center gap-3">
+                          {a.patient?.avatar ? (
+                            <img src={a.patient.avatar} alt={t('patientAvatarAlt')} className="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-zinc-800" />
+                          ) : (
+                            <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-slate-500">
+                              <User size={15} />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-extrabold text-slate-808 dark:text-zinc-100 text-sm truncate">{a.fullName}</h4>
+                            <p className="text-[10px] text-slate-400 font-semibold mt-0.5">{a.age}y / {a.gender} | Contact: {a.mobileNumber}</p>
+                          </div>
+                          <div>
+                            {getStatusBadge(a.status)}
+                          </div>
+                        </div>
+
+                        <div className="h-[1px] bg-slate-100 dark:bg-zinc-800/80"></div>
+
+                        {/* Schedule & Symptoms details */}
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div>
+                            <span className="block text-[8px] font-extrabold text-slate-400 uppercase tracking-wider">Schedule</span>
+                            <span className="font-bold text-slate-850 dark:text-zinc-200">{new Date(a.preferredDate).toLocaleDateString()}</span>
+                            <span className="block text-[10px] text-slate-400 font-semibold mt-0.5">{a.preferredTime}</span>
+                          </div>
+                          <div>
+                            <span className="block text-[8px] font-extrabold text-slate-400 uppercase tracking-wider">Symptoms</span>
+                            <p className="font-semibold text-slate-605 dark:text-zinc-400 truncate" title={a.disease}>{a.disease}</p>
+                          </div>
+                        </div>
+
+                        {/* Prescriptions input */}
+                        <div className="space-y-1">
+                          <span className="block text-[8px] font-extrabold text-slate-400 uppercase tracking-wider">Remarks / Advice</span>
+                          <input
+                            type="text"
+                            value={remarksDrafts[a._id] || ''}
+                            onChange={(e) => handleRemarksChange(a._id, e.target.value)}
+                            placeholder="Enter prescriptions..."
+                            className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-1 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-200 font-semibold min-h-[44px]"
+                          />
+                        </div>
+
+                        {/* Action buttons */}
+                        <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-zinc-800/60">
+                          {actionLoadingId === a._id ? (
+                            <div className="w-5 h-5 border-2 border-slate-200 border-t-ayurveda-green-600 rounded-full animate-spin"></div>
+                          ) : (
+                            <div className="flex items-center gap-2 w-full justify-between">
+                              <span className="text-[10px] text-slate-400 font-bold">Actions:</span>
+                              <div className="flex items-center gap-2">
+                                {a.status === 'Pending' && (
+                                  <button
+                                    onClick={() => handleStatusUpdate(a._id, 'Approved')}
+                                    className="flex items-center gap-1 px-3 py-2 rounded-xl bg-green-50 hover:bg-green-100 text-green-700 dark:bg-emerald-950/20 dark:hover:bg-emerald-950/40 dark:text-green-400 transition-colors font-bold text-xs min-h-[44px]"
+                                  >
+                                    <Check size={14} className="stroke-[3]" />
+                                    <span>Approve</span>
+                                  </button>
                                 )}
-                                <div>
-                                  <p className="font-extrabold text-slate-805 dark:text-zinc-100 leading-normal">{a.fullName}</p>
-                                  <p className="text-[9px] text-slate-400 font-semibold mt-0.5">{a.age}y / {a.gender} | Contact: {a.mobileNumber}</p>
-                                </div>
-                              </div>
-                            </td>
 
-                            <td className="px-5 py-4 whitespace-nowrap font-bold text-slate-800 dark:text-zinc-200">
-                              <p>{new Date(a.preferredDate).toLocaleDateString()}</p>
-                              <p className="text-[9px] text-slate-400 mt-0.5">{a.preferredTime}</p>
-                            </td>
+                                {a.status === 'Approved' && (
+                                  <button
+                                    onClick={() => handleStatusUpdate(a._id, 'Completed')}
+                                    className="flex items-center gap-1 px-3 py-2 rounded-xl bg-blue-50 hover:bg-blue-150 text-blue-700 dark:bg-blue-950/20 dark:text-blue-400 transition-colors font-bold text-xs min-h-[44px]"
+                                  >
+                                    <CheckCircle size={14} />
+                                    <span>Complete</span>
+                                  </button>
+                                )}
 
-                            <td className="px-5 py-4 max-w-[150px]">
-                              <p className="truncate font-semibold text-slate-600 dark:text-zinc-400" title={a.disease}>{a.disease}</p>
-                            </td>
-
-                            <td className="px-5 py-4 whitespace-nowrap">
-                              {getStatusBadge(a.status)}
-                            </td>
-
-                            <td className="px-5 py-4 min-w-[200px]">
-                              <input
-                                type="text"
-                                value={remarksDrafts[a._id] || ''}
-                                onChange={(e) => handleRemarksChange(a._id, e.target.value)}
-                                placeholder="Enter prescriptions..."
-                                className="w-full px-3 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-1 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-200 font-semibold"
-                              />
-                            </td>
-
-                            <td className="px-5 py-4 whitespace-nowrap text-right">
-                              <div className="flex items-center justify-end gap-1.5">
-                                {actionLoadingId === a._id ? (
-                                  <div className="w-4.5 h-4.5 border-2 border-slate-200 border-t-ayurveda-green-600 rounded-full animate-spin"></div>
-                                ) : (
-                                  <>
-                                    {a.status === 'Pending' && (
-                                      <button
-                                        onClick={() => handleStatusUpdate(a._id, 'Approved')}
-                                        className="p-1.5 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 dark:bg-emerald-950/20 dark:hover:bg-emerald-950/40 dark:text-green-400 transition-colors"
-                                      >
-                                        <Check size={13} className="stroke-[3]" />
-                                      </button>
-                                    )}
-
-                                    {a.status === 'Approved' && (
-                                      <button
-                                        onClick={() => handleStatusUpdate(a._id, 'Completed')}
-                                        className="p-1.5 rounded-lg bg-blue-50 hover:bg-blue-150 text-blue-700 dark:bg-blue-950/20 dark:text-blue-400 transition-colors"
-                                      >
-                                        <CheckCircle size={13} />
-                                      </button>
-                                    )}
-
-                                    {['Pending', 'Approved'].includes(a.status) && (
-                                      <button
-                                        onClick={() => handleStatusUpdate(a._id, 'Rejected')}
-                                        className="p-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 dark:bg-red-950/20 dark:text-red-400 transition-colors"
-                                      >
-                                        <X size={13} className="stroke-[3]" />
-                                      </button>
-                                    )}
-                                  </>
+                                {['Pending', 'Approved'].includes(a.status) && (
+                                  <button
+                                    onClick={() => handleStatusUpdate(a._id, 'Rejected')}
+                                    className="flex items-center gap-1 px-3 py-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 dark:bg-red-950/20 dark:text-red-400 transition-colors font-bold text-xs min-h-[44px]"
+                                  >
+                                    <X size={14} className="stroke-[3]" />
+                                    <span>Cancel</span>
+                                  </button>
                                 )}
                               </div>
-                            </td>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                    renderRow={(a) => (
+                      <tr key={a._id} className="hover:bg-slate-50/30 dark:hover:bg-zinc-800/20 transition-all">
+                        
+                        <td className="px-5 py-4 whitespace-nowrap">
+                          <div className="flex items-center gap-3.5">
+                            {a.patient?.avatar ? (
+                              <img src={a.patient.avatar} alt={t('patientAvatarAlt')} className="w-8.5 h-8.5 rounded-full object-cover border border-slate-200 dark:border-zinc-800" />
+                            ) : (
+                              <div className="w-8.5 h-8.5 rounded-full bg-slate-100 dark:bg-zinc-800 flex items-center justify-center font-bold text-slate-500">
+                                <User size={13} />
+                              </div>
+                            )}
+                            <div>
+                              <p className="font-extrabold text-slate-800 dark:text-zinc-100 leading-normal">{a.fullName}</p>
+                              <p className="text-[9px] text-slate-400 font-semibold mt-0.5">{a.age}y / {a.gender} | Contact: {a.mobileNumber}</p>
+                            </div>
+                          </div>
+                        </td>
 
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                        <td className="px-5 py-4 whitespace-nowrap font-bold text-slate-800 dark:text-zinc-200">
+                          <p>{new Date(a.preferredDate).toLocaleDateString()}</p>
+                          <p className="text-[9px] text-slate-400 mt-0.5">{a.preferredTime}</p>
+                        </td>
+
+                        <td className="px-5 py-4 max-w-[150px]">
+                          <p className="truncate font-semibold text-slate-600 dark:text-zinc-400" title={a.disease}>{a.disease}</p>
+                        </td>
+
+                        <td className="px-5 py-4 whitespace-nowrap">
+                          {getStatusBadge(a.status)}
+                        </td>
+
+                        <td className="px-5 py-4 min-w-[200px]">
+                          <input
+                            type="text"
+                            value={remarksDrafts[a._id] || ''}
+                            onChange={(e) => handleRemarksChange(a._id, e.target.value)}
+                            placeholder="Enter prescriptions..."
+                            className="w-full px-3 py-1.5 rounded-xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-1 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-200 font-semibold"
+                          />
+                        </td>
+
+                        <td className="px-5 py-4 whitespace-nowrap text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            {actionLoadingId === a._id ? (
+                              <div className="w-4.5 h-4.5 border-2 border-slate-200 border-t-ayurveda-green-600 rounded-full animate-spin"></div>
+                            ) : (
+                              <>
+                                {a.status === 'Pending' && (
+                                  <button
+                                    onClick={() => handleStatusUpdate(a._id, 'Approved')}
+                                    className="p-1.5 rounded-lg bg-green-50 hover:bg-green-100 text-green-700 dark:bg-emerald-950/20 dark:hover:bg-emerald-950/40 dark:text-green-400 transition-colors"
+                                  >
+                                    <Check size={13} className="stroke-[3]" />
+                                  </button>
+                                )}
+
+                                {a.status === 'Approved' && (
+                                  <button
+                                    onClick={() => handleStatusUpdate(a._id, 'Completed')}
+                                    className="p-1.5 rounded-lg bg-blue-50 hover:bg-blue-150 text-blue-700 dark:bg-blue-955/20 dark:text-blue-400 transition-colors"
+                                  >
+                                    <CheckCircle size={13} />
+                                  </button>
+                                )}
+
+                                {['Pending', 'Approved'].includes(a.status) && (
+                                  <button
+                                    onClick={() => handleStatusUpdate(a._id, 'Rejected')}
+                                    className="p-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 dark:bg-red-955/20 dark:text-red-400 transition-colors"
+                                  >
+                                    <X size={13} className="stroke-[3]" />
+                                  </button>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        </td>
+
+                      </tr>
+                    )}
+                  />
                 )}
 
                 {totalPages > 1 && (

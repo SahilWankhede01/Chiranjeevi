@@ -414,7 +414,7 @@ const Navbar = () => {
             {/* BOOK APPOINTMENT button visible on mobile header */}
             <Link
               to={getDashboardPath()}
-              className="bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold text-[10px] uppercase tracking-wider px-3.5 py-2 rounded-full shadow-md shadow-emerald-700/15 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center min-h-[38px]"
+              className="bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold text-[10px] uppercase tracking-wider px-3.5 py-2 rounded-full shadow-md shadow-emerald-700/15 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center min-h-[48px]"
             >
               {language === 'mr' ? 'वेळ घ्या' : language === 'hi' ? 'समय लें' : 'Book'}
             </Link>
@@ -422,7 +422,7 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               /* FIX 5: Tap target size - min-h-[48px] min-w-[48px] flex items-center justify-center ensures >48x48px hit area */
-              className="min-h-[40px] min-w-[40px] flex items-center justify-center rounded-xl bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 text-slate-500 dark:text-zinc-400"
+              className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-xl bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 text-slate-500 dark:text-zinc-400"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
@@ -430,7 +430,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               /* FIX 5: Tap target size - min-h-[48px] min-w-[48px] flex items-center justify-center ensures >48x48px hit area */
-              className="min-h-[40px] min-w-[40px] flex items-center justify-center rounded-xl text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-zinc-200 hover:bg-slate-50 dark:hover:bg-zinc-900 focus:outline-none"
+              className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-xl text-slate-600 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-zinc-200 hover:bg-slate-50 dark:hover:bg-zinc-900 focus:outline-none"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
