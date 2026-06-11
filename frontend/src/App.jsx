@@ -26,10 +26,15 @@ function App() {
           <AuthProvider>
             <Router>
               <div className="flex flex-col min-h-screen">
+                {/* FIX 3: Skip to content link for keyboard navigation */}
+                <a href="#main-content" className="skip-to-content">
+                  Skip to main content
+                </a>
                 <Navbar />
                 
                 {/* Main Content Area */}
-                <main className="flex-grow">
+                {/* FIX 5: Main landmark with skip link target ID */}
+                <main id="main-content" className="flex-grow">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />

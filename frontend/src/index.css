@@ -11,36 +11,44 @@
     @apply font-sans antialiased selection:bg-ayurveda-green-200 selection:text-ayurveda-green-900 dark:selection:bg-ayurveda-green-800 dark:selection:text-ayurveda-green-100 transition-colors duration-500 ease-in-out;
   }
   
-  /* Apply smooth transition to all elements that change state on hover or theme toggles */
+  /* Apply smooth transition to all interactive elements */
   a, button, input, select, textarea, svg, .glass-panel, .glass-card {
     @apply transition-all duration-300 ease-out;
   }
 }
 
-/* Glassmorphism Classes with softer borders and shadows */
+/* Premium Glassmorphism & Card designs */
 .glass-panel {
-  @apply bg-white/75 backdrop-blur-lg border border-white/30 dark:bg-zinc-950/75 dark:border-zinc-800/40;
+  @apply bg-white/80 backdrop-blur-xl border border-white/40 dark:bg-zinc-950/80 dark:border-zinc-800/40;
 }
 
 .glass-card {
-  @apply bg-white/60 backdrop-blur-md border border-white/20 shadow-xl shadow-slate-100/40 dark:bg-zinc-900/60 dark:border-zinc-800/20 dark:shadow-none;
+  @apply bg-white/70 backdrop-blur-lg border border-white/30 shadow-xl shadow-slate-100/30 dark:bg-zinc-900/70 dark:border-zinc-800/20 dark:shadow-none;
 }
 
-/* Pulse animation for WhatsApp button */
+.glass-card-premium {
+  @apply bg-gradient-to-tr from-white/90 to-white/70 backdrop-blur-xl border border-white/40 shadow-2xl shadow-emerald-950/5 dark:from-zinc-900/90 dark:to-zinc-900/60 dark:border-zinc-800/35;
+}
+
+/* Custom interactive chip elements */
+.selector-chip-active {
+  @apply bg-ayurveda-green-600 text-white shadow-md shadow-emerald-600/10 border-ayurveda-green-600 scale-[1.02] dark:bg-ayurveda-green-500 dark:border-ayurveda-green-500;
+}
+
+.selector-chip-inactive {
+  @apply bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 dark:bg-zinc-950 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-900;
+}
+
+/* Pulse animation for WhatsApp & alerts (Safe: doesn't override transform) */
 @keyframes pulse-ring {
   0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.3), 0 0 0 0 rgba(34, 197, 94, 0.5);
   }
-  
   70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
+    box-shadow: 0 15px 25px -3px rgba(34, 197, 94, 0.4), 0 0 0 12px rgba(34, 197, 94, 0);
   }
-  
   100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    box-shadow: 0 10px 20px -5px rgba(34, 197, 94, 0.3), 0 0 0 0 rgba(34, 197, 94, 0);
   }
 }
 
@@ -48,16 +56,249 @@
   animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Custom scrollbars */
+/* Premium ambient appointments pulse (Safe: doesn't override transform) */
+@keyframes appointment-pulse-ring {
+  0% {
+    box-shadow: 0 10px 20px -5px rgba(44, 94, 46, 0.3), 0 0 0 0 rgba(44, 94, 46, 0.5);
+  }
+  70% {
+    box-shadow: 0 15px 25px -3px rgba(44, 94, 46, 0.4), 0 0 0 12px rgba(44, 94, 46, 0);
+  }
+  100% {
+    box-shadow: 0 10px 20px -5px rgba(44, 94, 46, 0.3), 0 0 0 0 rgba(44, 94, 46, 0);
+  }
+}
+
+.appointment-pulse {
+  animation: appointment-pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shine effect keyframes */
+@keyframes shine-slide {
+  0% {
+    transform: skewX(-20deg) translateX(-150%);
+  }
+  100% {
+    transform: skewX(-20deg) translateX(150%);
+  }
+}
+
+/* Premium CTA buttons with elevated ambiance */
+.btn-premium-base {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-premium-base::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 35%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.15) 65%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg) translateX(-150%);
+  pointer-events: none;
+  transition: none;
+}
+
+.btn-premium-base:hover::after {
+  animation: shine-slide 1.5s ease-in-out infinite;
+}
+
+/* Custom ambient drifting color orbs */
+@keyframes drift-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@keyframes drift-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 40px) scale(1.15);
+  }
+}
+
+.glow-orb-green {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%);
+  filter: blur(60px);
+  animation: drift-1 25s ease-in-out infinite;
+}
+
+.glow-orb-saffron {
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.12) 0%, rgba(217, 119, 6, 0) 70%);
+  filter: blur(60px);
+  animation: drift-2 30s ease-in-out infinite;
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.float-animation {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+.float-animation-delay-1 {
+  animation: float-gentle 7s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.float-animation-delay-2 {
+  animation: float-gentle 8s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+/* Glowing Border Effect for Premium Containers */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(to right, #46ca96, #e89932);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+}
+.glow-border:hover::after {
+  opacity: 0.35;
+}
+
+/* Scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-50 dark:bg-zinc-900;
+  @apply bg-slate-50 dark:bg-zinc-950;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full hover:bg-slate-400 dark:bg-zinc-700 dark:hover:bg-zinc-600;
+  @apply bg-slate-200 rounded-full hover:bg-slate-300 dark:bg-zinc-800 dark:hover:bg-zinc-700;
+}
+
+/* FIX 1: Subtle card scale transform + increased box-shadow on hover */
+.hover-card-feedback {
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+}
+.hover-card-feedback:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.15);
+}
+
+/* FIX 3: Image Shimmer skeleton animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.shimmer-placeholder {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+.dark .shimmer-placeholder {
+  background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+  background-size: 200% 100%;
+}
+
+/* FIX 4: Scroll Micro-interactions - fade-up scroll animations */
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.scroll-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FIX 5: Tap target helper class */
+.tap-target-safe {
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom print rules for clinical reports */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+}
+
+/* FIX 3: Skip to content A11Y link styling */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2c5e2e;
+  color: white;
+  padding: 8px 16px;
+  z-index: 999;
+  font-weight: bold;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+  top: 10px;
+  outline: 2px solid white;
+  outline-offset: -4px;
+}
+
+/* FIX 4: Focus Visible custom accessibility indicator (WCAG 2.4.7) */
+a:focus-visible, 
+button:focus-visible, 
+input:focus-visible, 
+textarea:focus-visible, 
+select:focus-visible, 
+[tabindex]:focus-visible {
+  outline: 2px solid #2c5e2e !important;
+  outline-offset: 2px !important;
 }

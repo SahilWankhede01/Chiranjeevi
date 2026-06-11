@@ -36,7 +36,7 @@ const sendEmail = async ({ to, subject, html }) => {
 
 const sendAppointmentNotificationToDoctor = async ({ patientName, patientPhone, patientEmail, date, time, symptoms }) => {
   try {
-    const doctorEmails = process.env.DOCTOR_EMAILS || process.env.DOCTOR_EMAIL || 'yateshgahukar@gmail.com';
+    const doctorEmails = process.env.DOCTOR_EMAILS || process.env.DOCTOR_EMAIL || 'yateshgahukar4@gmail.com';
     
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">

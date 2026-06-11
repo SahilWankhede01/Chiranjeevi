@@ -13,7 +13,7 @@ const protect = async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1];
 
       // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecretkeyforchiranjeeviayurveda123');
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'chiranjeevi_ayurveda_jwt_secret_5168d3b068b5fbbbfba83f146aeaf6c0eb42a82c462e355eeeae5d719063b8ce');
 
       // Get user from the token and attach to request (exclude password)
       req.user = await User.findById(decoded.id).select('-password');

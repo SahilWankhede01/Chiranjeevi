@@ -16,12 +16,12 @@ export default {
             200: '#b5ecd7',
             300: '#81deb9',
             400: '#46ca96',
-            500: '#1b9d67', // A much smoother, richer Ayurvedic green
-            605: '#169d67',
-            600: '#128657',
-            700: '#0c6d46',
-            800: '#0a593a',
-            900: '#084830',
+            500: '#2c5e2e', // A much smoother, richer Ayurvedic green (WCAG Contrast accessible)
+            605: '#234b25',
+            600: '#234b25',
+            700: '#1b3b1c',
+            800: '#132914',
+            900: '#0a160b',
           },
           saffron: {
             50: '#fdf8eb',

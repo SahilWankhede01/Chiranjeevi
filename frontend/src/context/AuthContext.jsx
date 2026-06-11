@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Configure Axios Base URL for production deployments (e.g. Netlify)
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || '';
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {

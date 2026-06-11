@@ -87,13 +87,13 @@ Create a `.env` file in the `backend/` directory (see [backend/.env.example](fil
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/chiranjeevi-ayurveda
-JWT_SECRET=supersecretkeyforchiranjeeviayurveda123
+JWT_SECRET=your_jwt_secret_key
 
 # Nodemailer setup (Gmail example)
 EMAIL_SERVICE=gmail
 EMAIL_USER=your_email@gmail.com
 EMAIL_PASS=your_app_password
-DOCTOR_EMAIL=yateshgahukar@gmail.com
+DOCTOR_EMAIL=yateshgahukar4@gmail.com
 ```
 
 *Note: For testing email dispatch, configure Gmail App Passwords. Otherwise, the system logs email outputs to the terminal instead of failing, to prevent booking crashes.*
@@ -168,7 +168,7 @@ Run the development servers:
 1. **Role-Based Testing**:
    - For easy evaluation, the registration form (`/register`) includes a **Role Selector** dropdown.
    - You can sign up as a **Patient** or a **Doctor**.
-   - If you register a user with the doctor's email specified in `.env` (default: `yateshgahukar@gmail.com`), the backend will automatically upgrade it to the `doctor` role.
+   - If you register a user with the doctor's email specified in `.env` (default: `yateshgahukar4@gmail.com`), the backend will automatically upgrade it to the `doctor` role.
 
 2. **Multilingual Verification**:
    - Select English, मराठी, or हिन्दी in the Navbar dropdown. All static landing text, disease cards, form fields, and dashboard interfaces will update instantly.
@@ -226,11 +226,10 @@ Render deploys directly from GitHub:
    - `NODE_ENV` = `production`
    - `MONGO_URI` = `YOUR_MONGODB_ATLAS_CONNECTION_STRING`
    - `JWT_SECRET` = `ANY_RANDOM_LONG_SECRET_KEY`
-   - `DOCTOR_EMAILS` = `yateshgahukar@gmail.com,sahilwankhade0204@gmail.com`
+   - `DOCTOR_EMAILS` = `yateshgahukar4@gmail.com,sahilwankhade0204@gmail.com`
    - `EMAIL_SERVICE` = `gmail` (Optional, for notifications)
    - `EMAIL_USER` = `your-email@gmail.com` (Optional)
    - `EMAIL_PASS` = `your-app-password` (Optional)
 6. Click **Deploy Web Service**.
 
 Once Render finishes building, you will get a live URL (e.g., `https://chiranjeevi-ayurveda-clinic.onrender.com`) where the clinic application will be active for anyone on the internet!
-

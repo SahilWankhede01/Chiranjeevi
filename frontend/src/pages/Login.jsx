@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useToast } from '../context/ToastContext';
-import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, LogIn, Sparkles } from 'lucide-react';
 
 const Login = () => {
   const { login, user } = useAuth();
@@ -16,7 +16,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loadingState, setLoadingState] = useState(false);
 
-  // If already logged in, redirect to correct dashboard
   useEffect(() => {
     if (user) {
       if (user.role === 'doctor') {
@@ -51,97 +50,129 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-gradient-to-b from-[#faf7e6] to-[#faf7e6]/95 dark:from-zinc-950 dark:to-zinc-900 transition-colors duration-300">
-      <div className="max-w-md w-full space-y-8 glass-card p-8 rounded-3xl shadow-2xl border border-slate-100 dark:border-zinc-800/80">
+    <div className="min-h-[85vh] flex items-stretch bg-white dark:bg-zinc-950 transition-colors duration-500 overflow-hidden">
+      
+      {/* DESKTOP SPLIT PANEL (Left Side visual) */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-tr from-[#0f2e1e] to-[#205136] text-white p-12 flex-col justify-between relative overflow-hidden text-left">
         
-        {/* Title */}
-        <div className="text-center">
-          <div className="mx-auto h-12 w-12 rounded-2xl bg-gradient-to-tr from-ayurveda-green-600 to-ayurveda-saffron-500 flex items-center justify-center text-white shadow-md">
-            <LogIn size={24} />
+        {/* Floating background blur orbs */}
+        <div className="absolute top-10 left-10 w-64 h-64 glow-orb-green opacity-40"></div>
+        <div className="absolute bottom-10 right-10 w-72 h-72 glow-orb-saffron opacity-20"></div>
+
+        <div className="relative z-10 flex items-center gap-3">
+          <div className="p-1 bg-white/10 rounded-xl">
+            <Sparkles size={20} className="text-emerald-350" />
           </div>
-          <h2 className="mt-6 text-3xl font-extrabold text-slate-800 dark:text-zinc-50">
-            {t('login')}
+          <div>
+            <span className="font-serif font-extrabold text-lg tracking-wide uppercase">SHREE CHIRANJEEVI</span>
+            <span className="block text-[8px] tracking-widest text-emerald-300 font-extrabold uppercase mt-0.5">Ayurveda & Panchakarma Clinic</span>
+          </div>
+        </div>
+
+        <div className="relative z-10 space-y-6 max-w-md my-auto">
+          <h2 className="text-4xl font-serif leading-snug tracking-tight font-medium">
+            "Health is a state of complete harmony of <span className="italic text-emerald-300">body, mind, and spirit.</span>"
           </h2>
-          <p className="mt-2 text-xs text-slate-400 dark:text-zinc-500 font-medium">
-            Access your clinic account and appointments
+          <p className="text-xs text-emerald-100/70 font-semibold leading-relaxed">
+            Connect to your patient account to book authentic Panchakarma therapies, view personalized herbal routines, and manage checkups under Dr. Yatesh Gahukar.
           </p>
         </div>
 
-        {/* Form */}
-        <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
-          
-          {/* Email field */}
-          <div className="relative">
-            <label className="block text-[11px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-1.5 text-left">Email Address</label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
-                <Mail size={18} />
-              </span>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-                className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all"
-              />
-            </div>
-          </div>
-
-          {/* Password field */}
-          <div className="relative">
-            <label className="block text-[11px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider mb-1.5 text-left">Password</label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 pointer-events-none">
-                <Lock size={18} />
-              </span>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full pl-11 pr-11 py-3 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
-          </div>
-
-          {/* Submit btn */}
-          <button
-            type="submit"
-            disabled={loadingState}
-            className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 hover:from-ayurveda-green-750 hover:to-ayurveda-green-800 text-white font-bold py-3.5 rounded-2xl shadow-lg transition-all duration-200 uppercase text-xs tracking-wider mt-4 flex items-center justify-center gap-2"
-          >
-            {loadingState ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                {t('loading')}
-              </>
-            ) : (
-              t('login')
-            )}
-          </button>
-        </form>
-
-        {/* Footer links */}
-        <div className="text-center text-xs mt-6 text-slate-500 dark:text-zinc-500">
-          <span>Don't have an account? </span>
-          <Link
-            to="/register"
-            className="font-bold text-ayurveda-green-600 dark:text-ayurveda-green-400 hover:underline"
-          >
-            {t('register')}
-          </Link>
+        <div className="relative z-10 text-[10px] text-emerald-250 font-bold uppercase tracking-wider">
+          © Shree Chiranjeevi Clinic • Authentic Healing
         </div>
 
       </div>
+
+      {/* CARD CONSOLE (Right Side form) */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 relative">
+        <div className="absolute top-10 right-10 w-72 h-72 glow-orb-saffron -z-10 opacity-30"></div>
+        
+        <div className="max-w-md w-full space-y-8 glass-card-premium p-8 sm:p-10 rounded-[2.5rem] shadow-2xl relative z-10 text-left">
+          
+          <div className="text-center">
+            <div className="mx-auto h-14 w-14 rounded-2xl bg-gradient-to-tr from-ayurveda-green-600 to-ayurveda-green-700 flex items-center justify-center text-white shadow-lg float-animation">
+              <LogIn size={22} className="stroke-[2.2]" />
+            </div>
+            <h2 className="mt-5 text-2xl font-serif font-extrabold text-slate-805 dark:text-zinc-50 tracking-tight">
+              {t('login')}
+            </h2>
+            <p className="mt-1 text-xs text-slate-400 font-bold uppercase tracking-wider mt-1.5">
+              Access your clinical portal
+            </p>
+          </div>
+
+          <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+            
+            {/* Email */}
+            <div>
+              <label className="block text-[10px] font-extrabold text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Email Address</label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                  <Mail size={16} />
+                </span>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@email.com"
+                  className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-[10px] font-extrabold text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-2">Password</label>
+              <div className="relative">
+                <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                  <Lock size={16} />
+                </span>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full pl-11 pr-11 py-3.5 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-950 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loadingState}
+              className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase text-xs tracking-widest mt-6 flex items-center justify-center gap-2.5"
+            >
+              {loadingState ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <span>{t('login')}</span>
+              )}
+            </button>
+          </form>
+
+          <div className="text-center text-xs mt-6 text-slate-400 dark:text-zinc-550 font-bold">
+            <span>Don't have an account? </span>
+            <Link to="/register" className="text-ayurveda-green-600 hover:underline font-extrabold">
+              {t('register')}
+            </Link>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   );
 };

@@ -4,7 +4,7 @@ const Notification = require('../models/Notification');
 
 // Generate JWT token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET || 'supersecretkeyforchiranjeeviayurveda123', {
+  return jwt.sign({ id }, process.env.JWT_SECRET || 'chiranjeevi_ayurveda_jwt_secret_5168d3b068b5fbbbfba83f146aeaf6c0eb42a82c462e355eeeae5d719063b8ce', {
     expiresIn: '30d',
   });
 };
@@ -25,7 +25,7 @@ const registerUser = async (req, res, next) => {
 
     // Determine role
     let assignedRole = 'patient';
-    const doctorEmailsEnv = process.env.DOCTOR_EMAILS || 'yateshgahukar@gmail.com,sahilwankhade0204@gmail.com,chiranjeeviayurveda1@gmail.com';
+    const doctorEmailsEnv = process.env.DOCTOR_EMAILS || 'yateshgahukar4@gmail.com,sahilwankhade0204@gmail.com,chiranjeeviayurveda1@gmail.com';
     const allowedDoctorEmails = doctorEmailsEnv.split(',').map(e => e.trim().toLowerCase());
 
     if (role === 'doctor') {
