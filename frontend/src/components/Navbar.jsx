@@ -121,7 +121,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 glass-panel border-b border-slate-100/80 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 text-slate-800 dark:text-zinc-100 shadow-lg shadow-slate-100/20 dark:shadow-none transition-all duration-500">
+    <nav className="sticky top-0 z-50 w-full overflow-hidden glass-panel border-b border-slate-100/80 dark:border-zinc-800 bg-white/80 dark:bg-zinc-955/80 text-slate-800 dark:text-zinc-100 shadow-lg shadow-slate-100/20 dark:shadow-none transition-all duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 gap-4 xl:gap-8">
           
@@ -272,7 +272,7 @@ const Navbar = () => {
                 </button>
 
                 {notifOpen && (
-                  <div className="absolute right-0 mt-2.5 w-96 rounded-3xl bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 shadow-2xl p-4.5 z-50 animate-fade-in">
+                  <div className="absolute right-0 mt-2.5 w-[calc(100vw-32px)] sm:w-96 rounded-3xl bg-white dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 shadow-2xl p-4.5 z-50 animate-fade-in">
                     <div className="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-zinc-800 animate-fade-in">
                       <h4 className="font-extrabold text-sm text-slate-800 dark:text-zinc-100 flex items-center gap-1.5">
                         <Bell size={16} className="text-ayurveda-green-600" />

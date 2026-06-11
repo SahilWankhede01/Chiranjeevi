@@ -141,7 +141,7 @@ const Home = () => {
     <div className="flex flex-col min-h-screen">
       
       {/* 1. HERO SECTION */}
-      <section id="hero" className="relative bg-gradient-to-b from-ayurveda-cream/50 via-white to-white dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-900 pt-20 pb-28 md:py-36 overflow-hidden transition-all duration-300">
+      <section id="hero" className="relative bg-gradient-to-b from-ayurveda-cream/50 via-white to-white dark:from-zinc-950 dark:via-zinc-950 dark:to-zinc-900 pt-20 pb-28 md:py-36 w-full overflow-hidden px-4 transition-all duration-300">
         
         {/* Decorative Floating Leaves Keyframe & Sway Styles */}
         <style>{`
@@ -263,11 +263,11 @@ const Home = () => {
               </p>
               
               {/* Call to Actions */}
-              <div className="flex flex-col xs:flex-row items-center gap-4 mt-6 w-full">
+              <div className="flex flex-col gap-3 w-full sm:flex-row items-center mt-6">
                 {/* Book Appointment CTA */}
                 <Link
                   to="/patient-dashboard"
-                  className="btn-premium-base appointment-pulse bg-gradient-to-r from-[#2c5e2e] to-[#1b3b1c] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-emerald-800/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full xs:w-auto min-w-0 xs:min-w-[220px] whitespace-nowrap border border-emerald-700/20"
+                  className="btn-premium-base appointment-pulse bg-gradient-to-r from-[#2c5e2e] to-[#1b3b1c] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-emerald-800/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full sm:w-auto min-w-0 whitespace-nowrap border border-emerald-700/20"
                 >
                   <span>{t('heroCTA1')}</span>
                   <ArrowRight size={14} className="stroke-[2.5]" />
@@ -277,7 +277,7 @@ const Home = () => {
                   href="https://wa.me/919145331731"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-premium-base whatsapp-pulse bg-gradient-to-r from-[#20ba59] to-[#25D366] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-green-500/35 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full xs:w-auto min-w-0 xs:min-w-[220px] whitespace-nowrap border border-green-500/20"
+                  className="btn-premium-base whatsapp-pulse bg-gradient-to-r from-[#20ba59] to-[#25D366] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-green-500/35 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full sm:w-auto min-w-0 whitespace-nowrap border border-green-500/20"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.731-1.456L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.863-9.864.001-2.637-1.03-5.114-2.905-6.989-1.874-1.875-4.352-2.907-6.99-2.908-5.442 0-9.869 4.42-9.873 9.863-.001 1.79.47 3.537 1.366 5.09L1.933 22.007l6.196-1.625c1.472.802 2.871 1.202 4.518 1.202zm11.233-7.618c-.3-.15-1.771-.875-2.071-.985-.3-.11-.52-.16-.74.16-.22.32-.85 1.075-1.04 1.29-.19.22-.38.25-.68.1-.3-.15-1.265-.467-2.41-1.485-.89-.79-1.49-1.77-1.66-2.07-.19-.3-.02-.47.13-.62.14-.13.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.07-.15-.74-1.785-1.01-2.435-.26-.63-.53-.54-.74-.55-.19-.01-.41-.01-.63-.01-.22 0-.58.08-.88.41-.3.33-1.15 1.13-1.15 2.75 0 1.62 1.18 3.19 1.34 3.4 1.57 2.19 3.01 3.22 4.41 3.72.63.22 1.12.27 1.54.2.47-.07 1.45-.59 1.65-1.17.2-.58.2-1.08.14-1.18-.06-.1-.22-.15-.52-.3z"/>
@@ -564,10 +564,10 @@ const Home = () => {
             })}
           </div>
 
-          <div className="mt-20 text-center">
+          <div className="mt-20 text-center px-4">
             <Link
               to="/patient-dashboard"
-              className="btn-premium-base appointment-pulse bg-gradient-to-r from-[#2c5e2e] to-[#1b3b1c] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-emerald-800/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] min-w-[220px] whitespace-nowrap border border-emerald-700/20"
+              className="btn-premium-base appointment-pulse bg-gradient-to-r from-[#2c5e2e] to-[#1b3b1c] text-white font-extrabold text-xs uppercase tracking-widest px-8 rounded-full shadow-lg hover:shadow-emerald-800/30 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 inline-flex items-center justify-center gap-2.5 h-[54px] w-full sm:w-auto sm:min-w-[220px] whitespace-nowrap border border-emerald-700/20"
             >
               <Calendar size={14} />
               <span>{t('bookNow')}</span>
