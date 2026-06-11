@@ -127,15 +127,15 @@ const Navbar = () => {
           
           {/* Logo Brand */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link to="/" className="flex items-center gap-2 group">
               <div className="relative p-1 bg-gradient-to-tr from-ayurveda-green-200 to-ayurveda-saffron-100 dark:from-zinc-900 dark:to-zinc-800 rounded-xl transition-all duration-300 group-hover:scale-105 shadow-sm">
-                <Logo className="w-10 h-10 text-ayurveda-green-700 dark:text-ayurveda-green-500" />
+                <Logo className="w-7 h-7 xs:w-10 xs:h-10 text-ayurveda-green-700 dark:text-ayurveda-green-500" />
               </div>
               <div className="flex flex-col">
-                <span className="font-serif font-extrabold text-lg xl:text-xl tracking-wide text-ayurveda-green-800 dark:text-zinc-200 leading-tight group-hover:text-ayurveda-green-700 dark:group-hover:text-ayurveda-green-400 transition-colors">
+                <span className="font-serif font-extrabold text-xs xs:text-sm sm:text-lg xl:text-xl tracking-wide text-ayurveda-green-800 dark:text-zinc-200 leading-tight group-hover:text-ayurveda-green-700 dark:group-hover:text-ayurveda-green-400 transition-colors">
                   {t('clinicName')}
                 </span>
-                <span className="text-[8px] xl:text-[9px] font-extrabold text-ayurveda-saffron-600 dark:text-ayurveda-saffron-400 uppercase tracking-[0.2em] mt-0.5">
+                <span className="hidden xs:block text-[8px] xl:text-[9px] font-extrabold text-ayurveda-saffron-600 dark:text-ayurveda-saffron-400 uppercase tracking-[0.2em] mt-0.5">
                   {t('clinicSub')}
                 </span>
               </div>
@@ -422,7 +422,7 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               /* FIX 5: Tap target size - min-h-[48px] min-w-[48px] flex items-center justify-center ensures >48x48px hit area */
-              className="min-h-[48px] min-w-[48px] flex items-center justify-center rounded-xl bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 text-slate-500 dark:text-zinc-400"
+              className="hidden sm:flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl bg-slate-50 dark:bg-zinc-900 border border-slate-100 dark:border-zinc-800 text-slate-500 dark:text-slate-400"
             >
               {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
@@ -496,23 +496,46 @@ const Navbar = () => {
             );
           })}
 
-          {/* Mobile Language Switch */}
-          <div className="py-2 border-t border-slate-100 dark:border-zinc-800">
-            <p className="px-3 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2.5">Select Language</p>
-            <div className="flex gap-2 px-3">
-              {[
-                { code: 'en', label: 'EN' },
-                { code: 'mr', label: 'मराठी' },
-                { code: 'hi', label: 'हिन्दी' }
-              ].map((lang) => (
-                <button
-                  key={lang.code}
-                  onClick={() => selectLanguage(lang.code)}
-                  className={`text-xs px-3.5 py-2 rounded-full font-bold border transition-all ${language === lang.code ? 'bg-ayurveda-green-600 text-white border-ayurveda-green-600' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-300'}`}
-                >
-                  {lang.label}
-                </button>
-              ))}
+          {/* Mobile Language Switch & Theme Toggle */}
+          <div className="py-3 border-t border-slate-100 dark:border-zinc-800 flex flex-wrap gap-4 justify-between items-center px-3">
+            <div>
+              <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Select Language</p>
+              <div className="flex gap-2">
+                {[
+                  { code: 'en', label: 'EN' },
+                  { code: 'mr', label: 'मराठी' },
+                  { code: 'hi', label: 'हिन्दी' }
+                ].map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => selectLanguage(lang.code)}
+                    className={`text-xs px-3.5 py-2 rounded-full font-bold border transition-all ${language === lang.code ? 'bg-ayurveda-green-600 text-white border-ayurveda-green-600' : 'bg-transparent border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-300'}`}
+                  >
+                    {lang.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Theme</p>
+              <button
+                onClick={toggleTheme}
+                type="button"
+                className="min-h-[38px] px-4 rounded-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-xs font-bold text-slate-600 dark:text-zinc-300 flex items-center gap-2"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun size={14} className="text-amber-500" />
+                    <span>Light Mode</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon size={14} className="text-slate-700" />
+                    <span>Dark Mode</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
