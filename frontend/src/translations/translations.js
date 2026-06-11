@@ -239,7 +239,13 @@ export const translations = {
     allNotifications: "Notifications Log",
     markRead: "Mark Read",
     page: "Page",
-    of: "of"
+    of: "of",
+    emailValidFormatErr: "Please enter a valid email address",
+    emailDisposableErr: "Temporary/disposable emails are not allowed. Please use a real email address.",
+    emailValidSuccess: "✓ Email looks good",
+    emailDuplicateErr: "⚠️ This email is already registered. Please login to your existing account or use a different email.",
+    emailChecking: "Checking...",
+    alreadyHaveAccountLogin: "Already have an account? Login here →"
   },
   mr: {
     // Navbar & Common
@@ -481,7 +487,13 @@ export const translations = {
     allNotifications: "सर्व सूचना लॉग",
     markRead: "वाचले म्हणून चिन्हांकित करा",
     page: "पृष्ठ",
-    of: "पैकी"
+    of: "पैकी",
+    emailValidFormatErr: "कृपया एक वैध ईमेल पत्ता प्रविष्ट करा",
+    emailDisposableErr: "तात्पुरते किंवा विल्हेवाट लावणारे ईमेल चालणार नाहीत. कृपया वास्तविक ईमेल पत्ता वापरा.",
+    emailValidSuccess: "✓ ईमेल योग्य वाटत आहे",
+    emailDuplicateErr: "⚠️ हा ईमेल आधीच नोंदणीकृत आहे. कृपया आपल्या विद्यमान खात्यात लॉगिन करा किंवा दुसरा ईमेल वापरा.",
+    emailChecking: "तपासत आहे...",
+    alreadyHaveAccountLogin: "आधीच खाते आहे? येथे लॉगिन करा →"
   },
   hi: {
     // Navbar & Common
@@ -723,6 +735,12 @@ export const translations = {
     allNotifications: "सभी सूचना लॉग",
     markRead: "पढ़ा हुआ मार्क करें",
     page: "पृष्ठ",
-    of: "का"
+    of: "का",
+    emailValidFormatErr: "कृपया एक वैध ईमेल पता दर्ज करें",
+    emailDisposableErr: "अस्थायी/डिस्पोजेबल ईमेल की अनुमति नहीं है। कृपया वास्तविक ईमेल पता दर्ज करें।",
+    emailValidSuccess: "✓ ईमेल सही लग रहा है",
+    emailDuplicateErr: "⚠️ यह ईमेल पहले से ही पंजीकृत है। कृपया अपने मौजूदा खाते में लॉगिन करें या किसी अन्य ईमेल का उपयोग करें।",
+    emailChecking: "जांच की जा रही है...",
+    alreadyHaveAccountLogin: "पहले से ही खाता है? यहाँ लॉगिन करें →"
   }
 };

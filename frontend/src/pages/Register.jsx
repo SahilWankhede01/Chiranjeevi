@@ -20,6 +20,88 @@ const Register = () => {
   const [role, setRole] = useState('patient');
   const [loadingState, setLoadingState] = useState(false);
 
+  // Email validation states
+  const [emailChecking, setEmailChecking] = useState(false);
+  const [emailValidationError, setEmailValidationError] = useState('');
+  const [emailValidationSuccess, setEmailValidationSuccess] = useState('');
+  const [apiConflictError, setApiConflictError] = useState(false);
+  const debounceRef = React.useRef(null);
+
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
+
+  const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  const disposableBlacklist = [
+    'mailinator.com', 'tempmail.com', 'guerrillamail.com', 'throwaway.email',
+    'fakeinbox.com', 'yopmail.com', 'sharklasers.com', 'trashmail.com',
+    'maildrop.cc', 'dispostable.com', 'temp-mail.org', 'getnada.com'
+  ];
+
+  const performValidation = (val) => {
+    const trimmed = val.trim();
+    if (!trimmed) {
+      setEmailChecking(false);
+      setEmailValidationError('');
+      setEmailValidationSuccess('');
+      return false;
+    }
+
+    if (!emailRegex.test(trimmed)) {
+      setEmailValidationError(t('emailValidFormatErr'));
+      setEmailValidationSuccess('');
+      setEmailChecking(false);
+      return false;
+    }
+
+    const domain = trimmed.split('@')[1];
+    if (domain && disposableBlacklist.includes(domain.toLowerCase())) {
+      setEmailValidationError(t('emailDisposableErr'));
+      setEmailValidationSuccess('');
+      setEmailChecking(false);
+      return false;
+    }
+
+    setEmailValidationSuccess(t('emailValidSuccess'));
+    setEmailValidationError('');
+    setEmailChecking(false);
+    return true;
+  };
+
+  const handleEmailChange = (e) => {
+    const val = e.target.value.toLowerCase().trim();
+    setEmail(val);
+    
+    // Clear validation and duplicate error states immediately as the user types
+    setEmailValidationError('');
+    setEmailValidationSuccess('');
+    setApiConflictError(false);
+    
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    if (val) {
+      setEmailChecking(true);
+      debounceRef.current = setTimeout(() => {
+        performValidation(val);
+      }, 505);
+    } else {
+      setEmailChecking(false);
+    }
+  };
+
+  const handleEmailBlur = () => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    performValidation(email);
+  };
+
   useEffect(() => {
     if (user) {
       if (user.role === 'doctor') {
@@ -42,11 +124,18 @@ const Register = () => {
       return;
     }
 
+    // Final verification of validation state before submit
+    const isValid = performValidation(email);
+    if (!isValid) {
+      return;
+    }
+
     setLoadingState(true);
+    setApiConflictError(false);
     try {
       const regUser = await register({
         name,
-        email,
+        email: email.trim(),
         password,
         phone,
         age: parseInt(age),
@@ -62,7 +151,13 @@ const Register = () => {
         navigate('/patient-dashboard');
       }
     } catch (err) {
-      showToast(err.message || 'Registration failed.', 'error');
+      const isConflict = err.response?.status === 409;
+      if (isConflict) {
+        setApiConflictError(true);
+      } else {
+        const errorMsg = err.response?.data?.message || err.message || 'Registration failed.';
+        showToast(errorMsg, 'error');
+      }
     } finally {
       setLoadingState(false);
     }
@@ -152,10 +247,37 @@ const Register = () => {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleEmailChange}
+                  onBlur={handleEmailBlur}
                   placeholder="john@example.com"
-                  className="w-full pl-11 pr-4 rounded-2xl border border-slate-200 dark:border-zinc-800 dark:bg-zinc-955 text-xs focus:ring-2 focus:ring-ayurveda-green-500 focus:outline-none dark:text-zinc-100 transition-all font-semibold h-[48px]"
+                  className={`w-full pl-11 pr-4 rounded-2xl border text-xs focus:ring-2 focus:outline-none transition-all font-semibold h-[48px] dark:bg-zinc-955 ${
+                    !email
+                      ? 'border-slate-200 dark:border-zinc-800 focus:ring-ayurveda-green-500 dark:text-zinc-100'
+                      : emailChecking
+                      ? 'border-ayurveda-saffron-400 dark:border-ayurveda-saffron-600 focus:ring-ayurveda-saffron-500 dark:text-zinc-100'
+                      : emailValidationError
+                      ? 'border-red-500 dark:border-red-800 focus:ring-red-500 text-red-650 dark:text-red-400'
+                      : emailValidationSuccess
+                      ? 'border-emerald-500 dark:border-emerald-700 focus:ring-emerald-500 text-emerald-600 dark:text-emerald-400'
+                      : 'border-slate-200 dark:border-zinc-800 focus:ring-ayurveda-green-500 dark:text-zinc-100'
+                  }`}
                 />
+              </div>
+              
+              {/* Email validation feedback message */}
+              <div aria-live="polite" className="mt-1.5 text-[11px] font-bold min-h-[16px] flex items-center">
+                {emailChecking && (
+                  <div className="flex items-center gap-1.5 text-ayurveda-saffron-600 dark:text-ayurveda-saffron-400">
+                    <div className="w-3.5 h-3.5 border-2 border-ayurveda-saffron-600 dark:border-ayurveda-saffron-400 border-t-transparent rounded-full animate-spin"></div>
+                    <span>{t('emailChecking')}</span>
+                  </div>
+                )}
+                {!emailChecking && emailValidationError && (
+                  <span className="text-red-600 dark:text-red-400">{emailValidationError}</span>
+                )}
+                {!emailChecking && emailValidationSuccess && (
+                  <span className="text-emerald-600 dark:text-emerald-400">{emailValidationSuccess}</span>
+                )}
               </div>
             </div>
 
@@ -237,10 +359,34 @@ const Register = () => {
               </div>
             </div>
 
+            {/* 409 Conflict Error Box */}
+            {apiConflictError && (
+              <div
+                className="flex flex-col gap-2 p-4 rounded-xl border-l-4 border-red-500 bg-white dark:bg-zinc-900 shadow-md text-left mt-4 mb-2"
+                role="alert"
+                aria-live="polite"
+              >
+                <div className="flex items-start gap-2">
+                  <span className="text-red-500 text-sm leading-none mt-0.5">⚠️</span>
+                  <span className="text-xs font-bold text-slate-700 dark:text-zinc-300">
+                    {t('emailDuplicateErr')}
+                  </span>
+                </div>
+                <div className="pl-6">
+                  <Link
+                    to="/login"
+                    className="text-[11px] font-extrabold text-ayurveda-green-600 hover:text-ayurveda-green-700 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors uppercase tracking-wider"
+                  >
+                    {t('alreadyHaveAccountLogin')}
+                  </Link>
+                </div>
+              </div>
+            )}
+
             <button
               type="submit"
-              disabled={loadingState}
-              className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold min-h-[48px] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase text-xs tracking-widest mt-6 flex items-center justify-center gap-2.5"
+              disabled={loadingState || emailChecking || !!emailValidationError || !emailValidationSuccess || !email}
+              className="w-full bg-gradient-to-r from-ayurveda-green-600 to-ayurveda-green-700 text-white font-extrabold min-h-[48px] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 uppercase text-xs tracking-widest mt-6 flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loadingState ? (
                 <>
