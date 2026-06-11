@@ -128,7 +128,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full overflow-hidden glass-panel border-b border-slate-100/80 dark:border-zinc-800 bg-white/80 dark:bg-zinc-955/80 text-slate-800 dark:text-zinc-100 shadow-lg shadow-slate-100/20 dark:shadow-none transition-all duration-500">
+    <nav className="sticky top-0 z-50 w-full glass-panel border-b border-slate-100/80 dark:border-zinc-800 bg-white/80 dark:bg-zinc-955/80 text-slate-800 dark:text-zinc-100 shadow-lg shadow-slate-100/20 dark:shadow-none transition-all duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 gap-4 xl:gap-8">
           
